@@ -1,0 +1,20 @@
+﻿body {
+    height: 100%;
+}
+
+.topBar {
+    height: 50px;
+    background-color: aquamarine;
+}
+
+.sideBar {
+    background-color: green;
+    position: absolute;
+    top: 50px;
+    float: left;
+}
+
+.mainChat {
+    background-color: orange;
+    float:right;
+}
