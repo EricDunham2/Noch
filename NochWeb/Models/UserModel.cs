@@ -5,8 +5,6 @@ using Microsoft.Owin.Security;
 using System.Web;
 using System.Threading.Tasks;
 
-using NochDTO;
-
 namespace NochWeb.Models
 {
     public class UserModel

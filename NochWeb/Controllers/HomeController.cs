@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
-
 using NochWeb.Models;
-using NochDTO;
+using NochDAL.Data;
+using NochDAL;
 
 namespace NochWeb.Controllers
 {
@@ -22,6 +22,7 @@ namespace NochWeb.Controllers
             return View();
         }
 
+		[AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> RegisterConfirm(UserModel model)
         {
@@ -29,7 +30,7 @@ namespace NochWeb.Controllers
 
             try
             {
-                User user = new User()
+                Users user = new Users()
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
@@ -49,7 +50,7 @@ namespace NochWeb.Controllers
 
                 UserService.Register(user);
 
-                return View();
+				return View("Index");
             }
             catch (Exception ex) { return View(); }
         }
