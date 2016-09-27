@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NochDAL.Data;
 
-namespace NochDTO
+namespace NochDAL
 {
 
-    public class UserService
+    public class UserService : ServiceBase
     {
-        public static void Register(User user)
+        public static void Register(Users user)
         {
             using (NochDBEntities _db = new NochDBEntities())
             {

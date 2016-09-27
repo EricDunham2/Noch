@@ -59,63 +59,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Channel.cs">
-      <DependentUpon>NochDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain.cs">
-      <DependentUpon>NochDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Message.cs">
-      <DependentUpon>NochDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NochDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NochDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NochDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NochDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NochDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NochDB.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Data\Channels.cs" />
+    <Compile Include="Data\Domains.cs" />
+    <Compile Include="Data\Messages.cs" />
+    <Compile Include="Data\NochDBEntities.cs" />
+    <Compile Include="Data\UserDomains.cs" />
+    <Compile Include="Data\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs">
-      <DependentUpon>NochDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserDomain.cs">
-      <DependentUpon>NochDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="ServiceBase.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="NochDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NochDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="NochDB.edmx.diagram">
-      <DependentUpon>NochDB.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="NochDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NochDB.edmx</DependentUpon>
-      <LastGenOutput>NochDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="NochDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NochDB.edmx</DependentUpon>
-      <LastGenOutput>NochDB.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
