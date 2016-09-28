@@ -22,6 +22,12 @@ namespace NochWeb.Controllers
             return View();
         }
 
+        public ActionResult Chat(UserModel user)
+        {
+
+            return View();
+        }
+
 		[AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> RegisterConfirm(UserModel model)
@@ -74,8 +80,8 @@ namespace NochWeb.Controllers
                 return View("Index"); //return failed view.
             else
             {
-                HttpContext.Session["key"] = userObject.Username;
-                return View("Index"); //return successful view.
+                HttpContext.Session["user"] = userObject;
+                return RedirectToAction("Index", "Chat"); //return successful view.
             }
         }
 
