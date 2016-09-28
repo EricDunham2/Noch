@@ -54,5 +54,36 @@ namespace NochWeb.Controllers
             }
             catch (Exception ex) { return View(); }
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult SignInConfirm(string username, string password)
+        {
+            Users userObject;
+            using (_db)
+            {
+                IQueryable<Users> query = from u in _db.Users
+                            where u.Username == username
+                            where u.Password == password
+                            select u;
+
+                userObject = query.FirstOrDefault();
+            }
+
+            if (userObject == null)
+                return View("Index"); //return failed view.
+            else
+            {
+                HttpContext.Session["key"] = userObject.Username;
+                return View("Index"); //return successful view.
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SignOutConfirm()
+        {
+            HttpContext.Session.Remove("key");
+            return View("Index");
+        }
     }
 }
