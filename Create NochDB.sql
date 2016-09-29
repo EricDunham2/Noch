@@ -1,38 +1,39 @@
-USE [master]
+USE [nochdb]
 
-DROP DATABASE [NochDB]
-CREATE DATABASE [NochDB]
+DROP TABLE [UserDomains]
+DROP TABLE [Messages]
+DROP TABLE [Users]
+DROP TABLE [Channels]
+DROP TABLE [Domains]
 
-USE [NochDB]
-
-CREATE TABLE [Domain] (
+CREATE TABLE [Domains] (
 	[DomainID] INT NOT NULL IDENTITY(1, 1),
 	[Name] VARCHAR(50) NOT NULL,
 	[UpdatedOn] DATETIME NOT NULL,
 	PRIMARY KEY ([DomainID])
 );
 
-CREATE TABLE [User] (
+CREATE TABLE [Users] (
 	[UserID] INT NOT NULL IDENTITY(1, 1),
-	[FirstName] VARCHAR(20) NOT NULL,
-	[LastName] VARCHAR(50) NOT NULL,
+	[FirstName] VARCHAR(20),
+	[LastName] VARCHAR(50),
 	[Username] VARCHAR(20) NOT NULL,
 	[Password] VARCHAR(20) NOT NULL,
 	[Email] VARCHAR(50) NOT NULL,
-	[IsEmailConfirmed] BIT NOT NULL,
-	[Phone] VARCHAR(20) NOT NULL,
-	[Address] VARCHAR(100) NOT NULL,
-	[City] VARCHAR(50) NOT NULL,
-	[Province] VARCHAR(50) NOT NULL,
-	[Country] VARCHAR(50) NOT NULL,
-	[PostalCode] VARCHAR(20) NOT NULL,
-	[IsAdmin] BIT NOT NULL,
+	[IsEmailConfirmed] BIT,
+	[Phone] VARCHAR(20),
+	[Address] VARCHAR(100),
+	[City] VARCHAR(50),
+	[Province] VARCHAR(50),
+	[Country] VARCHAR(50),
+	[PostalCode] VARCHAR(20),
+	[IsAdmin] BIT ,
 	[CreatedOn] DATETIME NOT NULL,
 	[UpdatedOn] DATETIME NOT NULL,
 	PRIMARY KEY ([UserID])
 );
 
-CREATE TABLE [Message] (
+CREATE TABLE [Messages] (
 	[MessageID] INT NOT NULL IDENTITY(1, 1),
 	[ChannelID] INT NOT NULL,
 	[UserID] INT NOT NULL,
@@ -43,8 +44,8 @@ CREATE TABLE [Message] (
 	PRIMARY KEY ([MessageID])
 );
 
-CREATE TABLE [Channel] (
-	[ChannelID] INT NOT NULL IDENTITY(1, 1),
+CREATE TABLE [Channels] (
+	[ChannelID] INT NOT NULL,
 	[DomainID] INT NOT NULL,
 	[Name] VARCHAR(50) NOT NULL,
 	[CreatedOn] DATETIME NOT NULL,
@@ -52,19 +53,19 @@ CREATE TABLE [Channel] (
 	PRIMARY KEY ([ChannelID])
 );
 
-CREATE TABLE [UserDomain] (
+CREATE TABLE [UserDomains] (
 	[UserDomainID] INT NOT NULL,
 	[UserID] INT NOT NULL,
 	[DomainID] INT NOT NULL,
 	PRIMARY KEY ([UserDomainID])
 );
 
-ALTER TABLE [Message] ADD CONSTRAINT [Message_fk0] FOREIGN KEY ([ChannelID]) REFERENCES [Channel]([ChannelID]);
+ALTER TABLE [Messages] ADD CONSTRAINT [Messages_fk0] FOREIGN KEY ([ChannelID]) REFERENCES [Channels]([ChannelID]);
 
-ALTER TABLE [Message] ADD CONSTRAINT [Message_fk1] FOREIGN KEY ([UserID]) REFERENCES [User]([UserID]);
+ALTER TABLE [Messages] ADD CONSTRAINT [Messages_fk1] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID]);
 
-ALTER TABLE [Channel] ADD CONSTRAINT [Channel_fk0] FOREIGN KEY ([DomainID]) REFERENCES [Domain]([DomainID]);
+ALTER TABLE [Channels] ADD CONSTRAINT [Channels_fk0] FOREIGN KEY ([DomainID]) REFERENCES [Domains]([DomainID]);
 
-ALTER TABLE [UserDomain] ADD CONSTRAINT [UserDomain_fk0] FOREIGN KEY ([UserID]) REFERENCES [User]([UserID]);
+ALTER TABLE [UserDomains] ADD CONSTRAINT [UserDomains_fk0] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID]);
 
-ALTER TABLE [UserDomain] ADD CONSTRAINT [UserDomain_fk1] FOREIGN KEY ([DomainID]) REFERENCES [Domain]([DomainID]);
+ALTER TABLE [UserDomains] ADD CONSTRAINT [UserDomains_fk1] FOREIGN KEY ([DomainID]) REFERENCES [Domains]([DomainID]);
