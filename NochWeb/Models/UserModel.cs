@@ -13,10 +13,8 @@ namespace NochWeb.Models
         [Key]
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "First name is required!")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last name is required!")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Username is required!")]
@@ -26,6 +24,7 @@ namespace NochWeb.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Password repeat is required!")]
         [Compare("Password", ErrorMessage = "Passwords do not match!")]
         [DataType(DataType.Password)]
         public string RepeatPassword { get; set; }
@@ -36,7 +35,6 @@ namespace NochWeb.Models
 
         public bool IsEmailConfirmed { get; set; }
 
-        [Required(ErrorMessage = "Phone is required!")]
         public string Phone { get; set; }
 
         public string Address { get; set; }
