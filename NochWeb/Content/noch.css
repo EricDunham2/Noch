@@ -70,7 +70,7 @@
 .splash-heading {
   font-family: "Libre Baskerville", georgia, serif;
   font-weight: 600;
-  font-size: 72px;
+  font-size: 4em;
   color: #ffffff; }
 
 .splash-label {
@@ -97,5 +97,33 @@
     outline: none;
     border: 1px solid #ffffff;
     box-shadow: none; }
+
+/* Extra-Small Screens (phones) */
+@media (max-width: 767px) {
+  #sideBar {
+    display: none; }
+
+  #messageArea {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 56px;
+    top: 0; }
+
+  #inputArea {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 56px; }
+    #inputArea #messageContainer {
+      position: absolute;
+      left: 5px;
+      right: 100px;
+      top: 5px;
+      display: inline; } }
+/* Small Screens (tablets) */
+/* Medium Screens (Laptops) */
+/* Large Screens */
 
 /*# sourceMappingURL=noch.css.map */
