@@ -1,0 +1,180 @@
+$splashTextColor: #ffffff;
+$text: #000000;
+$sidebarColor: #ffeb3b;
+$siteRed: #ff5252;
+$buttonText: #ffffff;
+$greyBackground: #e9e9e9;
+$serif: "Libre Baskerville", georgia, serif;
+$sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
+
+#mainWrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+#sideBar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: $sidebarColor;
+    -webkit-box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
+    -moz-box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
+    box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
+}
+
+#messageArea {
+    position: absolute;
+    left: 250px;
+    right: 0;
+    bottom: 56px;
+    top: 0;
+    overflow-y: scroll;
+    background-color: $greyBackground;
+
+    ul#discussion {
+        padding: 0 20px;
+
+        li {
+            list-style-type: none;
+        }
+    }
+}
+
+#inputArea {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 250px;
+    height: 56px;
+    background-color: $sidebarColor;
+    -webkit-box-shadow: 8px 0px 8px 0px darken($sidebarColor, 25%);
+    -moz-box-shadow: 8px 0px 8px 0px darken($sidebarColor, 25%);
+    box-shadow: 8px 0px 8px 0px darken($sidebarColor, 25%);
+
+    #messageContainer {
+        position: absolute;
+        left: 0px;
+        right: 100px;
+        top: 5px;
+        display: inline;
+    }
+
+    #sendBtnContainer {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        width: 90px;
+        bottom: 5px;
+
+        .send-btn {
+            width: 100%;
+            height: 100%;
+            background-color: $siteRed;
+            border: none;
+            color: $buttonText;
+            font-size: 1.2em;
+            transition: background-color 150ms ease-out;
+
+            &:hover {
+                background-color: darken($siteRed, 5%);
+            }
+
+            &:active {
+                outline: none;
+                background-color: darken($siteRed, 10%);
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+.splash-heading {
+    font-family: $serif;
+    font-weight: 600;
+    font-size: 4em;
+    color: $splashTextColor;
+}
+
+.splash-label {
+    color: $splashTextColor;
+}
+
+.form-control, .btn {
+    outline: none;
+    border-color: #ffffff;
+
+    &:active {
+        outline: none;
+        border-color: inherit;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: inherit;
+    }
+}
+
+.form-control.splash-input {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    outline: none;
+    color: $text;
+
+    &:active {
+        outline: none;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid $splashTextColor;
+        box-shadow: none;
+    }
+}
+
+/* Extra-Small Screens (phones) */
+@media (max-width: 767px) {
+    #sideBar {
+        display: none;
+    }
+
+    #messageArea {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 56px;
+        top: 0;
+    }
+
+    #inputArea {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 56px;
+
+        #messageContainer {
+            position: absolute;
+            left: 5px;
+            right: 100px;
+            top: 5px;
+            display: inline;
+        }
+    }
+}
+
+/* Small Screens (tablets) */
+@media (min-width: 768px) {}
+
+/* Medium Screens (Laptops) */
+@media (min-width: 992px) {}
+
+/* Large Screens */
+@media (min-width: 1200px) {}
