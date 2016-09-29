@@ -148,7 +148,10 @@
       background-color: #ff5252;
       color: #ffffff; }
       #mobileChatNav button li a, #mobileChatNav button li, #mobileChatNav ul li a, #mobileChatNav ul li {
-        color: #ffffff; } }
+        color: #ffffff; }
+        #mobileChatNav button li a:active, #mobileChatNav button li a:hover, #mobileChatNav button li:active, #mobileChatNav button li:hover, #mobileChatNav ul li a:active, #mobileChatNav ul li a:hover, #mobileChatNav ul li:active, #mobileChatNav ul li:hover {
+          background-color: #ffeb3b;
+          color: #ff5252; } }
 /* Medium Screens (Laptops) */
 @media (min-width: 992px) and (max-width: 1199px) {
   #mobileChatNav {

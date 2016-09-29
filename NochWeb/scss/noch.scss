@@ -200,6 +200,10 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
             color: $buttonText;
             li a, li {
                 color: $buttonText;
+                &:active, &:hover {
+                    background-color: $sidebarColor;
+                    color: $siteRed;
+                }
             }
         }
 
