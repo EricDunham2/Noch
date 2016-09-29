@@ -4,6 +4,8 @@ $sidebarColor: #ffeb3b;
 $siteRed: #ff5252;
 $buttonText: #ffffff;
 $greyBackground: #e9e9e9;
+$serif: "Libre Baskerville", georgia, serif;
+$sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
 
 #mainWrap {
     position: absolute;
@@ -95,7 +97,7 @@ $greyBackground: #e9e9e9;
 }
 
 .splash-heading {
-    font-family: Georgia, serif;
+    font-family: $serif;
     font-weight: 600;
     font-size: 72px;
     color: $splashTextColor;
