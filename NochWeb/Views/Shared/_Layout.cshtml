@@ -2,20 +2,23 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <!-- CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/noch.css" rel="stylesheet" />
-    <!-- JS -->
-    <script src="@Url.Content("~/scripts/jquery-3.1.1.min.js")"></script>
-    <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/scripts/jquery.signalR-2.2.1.min.js")"></script>
-    <script src="signalr/hubs"></script>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	<!-- CSS -->
+	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+	<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap.custom.css" rel="stylesheet" />
+	<link href="~/Content/noch.css" rel="stylesheet" />
+	<link rel="icon" href="~/Content/img/icon_bw.png" />
+	<!-- JS -->
+	<script src="@Url.Content("~/scripts/jquery-3.1.1.min.js")"></script>
+	<script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+	<script src="@Url.Content("~/scripts/jquery.signalR-2.2.1.min.js")"></script>
+	<script src="signalr/hubs"></script>
 </head>
 <body>
-    <div>   
-        @RenderBody()
-    </div>
+	<div id="mainWrap">
+		@RenderBody()
+	</div>
 </body>
 </html>
