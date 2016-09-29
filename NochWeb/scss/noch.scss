@@ -37,8 +37,10 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     background-color: $greyBackground;
 
     ul#discussion {
-        padding: 0 20px;
-
+        padding: 0;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
         li {
             list-style-type: none;
         }
@@ -139,8 +141,27 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     }
 }
 
+.validation-message {
+    background-color: $siteRed;
+    color: #ffffff;
+    padding: 0.3em;
+    display: block;
+    margin: 10px 0;
+    &:empty {
+        display:none;
+    }
+}
+
+.form-control.input-validation-error {
+    border: 1px solid $siteRed;
+}
+
+
 /* Extra-Small Screens (phones) */
-@media (max-width: 767px) {
+@media (max-width: 767px) {}
+
+/* Small Screens (tablets) */
+@media (max-width: 991px) {
     #sideBar {
         display: none;
     }
@@ -168,13 +189,42 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
             display: inline;
         }
     }
+
+    #mobileChatNav {
+        display: inline;
+        position: absolute;
+        top:10px;
+        left:10px;
+        button, ul {
+            background-color: $siteRed;
+            color: $buttonText;
+            li a, li {
+                color: $buttonText;
+            }
+        }
+
+    }
 }
 
-/* Small Screens (tablets) */
-@media (min-width: 768px) {}
-
 /* Medium Screens (Laptops) */
-@media (min-width: 992px) {}
+@media (min-width: 992px) and (max-width: 1199px) {
+    #mobileChatNav {
+        display: none;
+    }
+}
 
 /* Large Screens */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+        #mobileChatNav {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
