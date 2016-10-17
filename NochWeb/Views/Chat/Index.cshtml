@@ -15,12 +15,12 @@
 <div id="sideBar">
     @foreach (var domain in Model)
     {
-        <div>
-            @domain.Name
+        <div class="col-xs-12" id="channels">
+			<span class="sidebar-heading">@domain.Name</span>
             @foreach (var channel in domain.Channels)
             {
                 <br />
-                <span class="channel" onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</span>
+                <span class="sidebar-item" onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</span>
             }
         </div>
         <br />
@@ -50,6 +50,6 @@
 <script src="~/scripts/knockout-3.4.0.js"></script>
 <script src="~/scripts/noch-app.js"></script>
 <script type="text/javascript">
-	VARS.init({ username: '@ViewBag.Username', userid: '@ViewBag.UserID' });
+	VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
 </script>
 <script src="@Url.Content("~/scripts/test.js")"></script>

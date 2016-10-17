@@ -16,6 +16,16 @@
   -moz-box-shadow: 0px 0px 8px 0px #bba700;
   box-shadow: 0px 0px 8px 0px #bba700; }
 
+#channels .sidebar-heading {
+  font-size: 18px;
+  font-weight: bold; }
+#channels .sidebar-item {
+  transition: all 200ms ease-out;
+  margin-left: 1em; }
+  #channels .sidebar-item:hover {
+    cursor: pointer;
+    color: #ff5252; }
+
 #messageArea {
   position: absolute;
   left: 250px;

@@ -27,6 +27,21 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
 }
 
+#channels {
+    .sidebar-heading {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .sidebar-item {   
+        transition: all 200ms ease-out;
+        margin-left: 1em;    
+        &:hover {
+            cursor: pointer;
+            color: $siteRed;
+        }
+    }
+}
+
 #messageArea {
     position: absolute;
     left: 250px;
@@ -212,6 +227,8 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
 
     }
 }
+
+
 
 /* Medium Screens (Laptops) */
 @media (min-width: 992px) and (max-width: 1199px) {
