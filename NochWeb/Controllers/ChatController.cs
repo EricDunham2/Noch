@@ -29,6 +29,10 @@ namespace NochWeb.Controllers
                     d.Channels = ChannelService.GetChannelsForDomain(d.DomainID);
                 }
 
+                // set default channel if there isnt one
+                if (Session["currchannel"] == null)
+                    Session["currchannel"] = domains[0].Channels.ElementAt(0).ChannelID;
+
                 return View(domains);
             }
             else
@@ -72,6 +76,8 @@ namespace NochWeb.Controllers
                 };
                 models.Add(model);
             }
+
+            Session["currchannel"] = channelId;
 
             return Json(models, JsonRequestBehavior.AllowGet);
         }

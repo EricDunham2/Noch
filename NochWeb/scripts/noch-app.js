@@ -14,6 +14,12 @@ var VARS = VARS || (function () {
 		},
 		getUserID: function () {
 			return _args.userid;
+		},
+		getChannelID: function () {
+		    return _args.channelid;
+		},
+		setChannelID: function (channelId) {
+		    _args.channelid = channelId;
 		}
 	};
 }());
@@ -52,7 +58,7 @@ $(document).ready(function () {
 				type: 'POST',
 				data: JSON.stringify({
 					userId: VARS.getUserID(),
-					channelId: 1,
+					channelId: VARS.getChannelID(),
 					msg: msg
 				}),
 				dataType: 'json',
@@ -63,6 +69,30 @@ $(document).ready(function () {
 			$('#message').val('').focus();
 		});
 	});
-
-	//send the message to the database
 });
+
+function getChannelMessages(channelId) {
+    $('#discussion').empty();
+
+    $.ajax({
+        url: '/Chat/GetMessages',
+        type: 'GET',
+        data: {
+            channelId: channelId,
+            messageCount: 50
+        },
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (messages) {
+            console.log(messages);
+            for (var i = 0; i < messages.length; ++i) {
+                $('#discussion').append('<li><strong>' + messages[i].Username
+				+ '</strong>:&nbsp;&nbsp;' + messages[i].Content + '</li>');
+            }
+            VARS.setChannelID(channelId);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+}

@@ -50,6 +50,6 @@
 <script src="~/scripts/knockout-3.4.0.js"></script>
 <script src="~/scripts/noch-app.js"></script>
 <script type="text/javascript">
-	VARS.init({ username: '@ViewBag.Username', userid: '@ViewBag.UserID' });
+	VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
 </script>
 <script src="@Url.Content("~/scripts/test.js")"></script>
