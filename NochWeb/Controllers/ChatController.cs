@@ -18,7 +18,10 @@ namespace NochWeb.Controllers
             ViewBag.Title = "Chat";
             ViewBag.Username = user.Username;
             ViewBag.UserID = user.UserID;
-            
+
+            // get all the domains for the user
+            var domains = UserService.GetDomainsForUser(user.UserID);
+
             return View();
         }
 
