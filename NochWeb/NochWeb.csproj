@@ -200,6 +200,7 @@
     <Content Include="scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="scripts\knockout-3.4.0.js" />
     <Content Include="scripts\noch-app.js" />
+    <Content Include="scripts\test.js" />
     <Content Include="Views\web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Web.config" />

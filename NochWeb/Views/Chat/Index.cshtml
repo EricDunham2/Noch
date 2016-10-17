@@ -1,4 +1,7 @@
-﻿@{
+﻿@using NochDAL.Data
+@model List<Domains>
+
+@{
 	Layout = "~/Views/Shared/_Layout.cshtml";
     var user = ViewBag.User;
 }
@@ -10,10 +13,23 @@
 	</ul>
 </div>
 <div id="sideBar">
-	
+    @foreach (var domain in Model)
+    {
+        <div>
+            @domain.Name
+            @foreach (var channel in domain.Channels)
+            {
+                <br />
+                <span class="channel" onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</span>
+            }
+        </div>
+        <br />
+    }
 </div>
 <div id="inputArea">
-	<div id="messageContainer"><input class="input-lg form-control" type="text" id="message" /></div>
+	<div id="messageContainer">
+        <input class="input-lg form-control" type="text" id="message" />
+    </div>
 	<div id="sendBtnContainer">
 		<button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
 	</div>
@@ -36,3 +52,4 @@
 <script type="text/javascript">
 	VARS.init({ username: '@ViewBag.Username', userid: '@ViewBag.UserID' });
 </script>
+<script src="@Url.Content("~/scripts/test.js")"></script>
