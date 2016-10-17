@@ -15,17 +15,27 @@ namespace NochWeb.Controllers
         public ActionResult Index()
         {
             Users user = (Users)HttpContext.Session["user"];
-            ViewBag.Title = "Chat";
-            ViewBag.Username = user.Username;
-            ViewBag.UserID = user.UserID;
 
-            // get all the domains for the user
-            var domains = UserService.GetDomainsForUser(user.UserID);
+            if (user != null)
+            {
+                ViewBag.Title = "Chat";
+                ViewBag.Username = user.Username;
+                ViewBag.UserID = user.UserID;
 
-            return View();
+                // get all the domains for the user
+                var domains = DomainService.GetDomainsForUser(user.UserID);
+                foreach (Domains d in domains)
+                {
+                    d.Channels = ChannelService.GetChannelsForDomain(d.DomainID);
+                }
+
+                return View(domains);
+            }
+            else
+                return Redirect("Home/Index");
         }
 
-        public ActionResult SendMessage(int userId, int channelId, string msg)
+        public void SendMessage(int userId, int channelId, string msg)
         {
             Messages message = new Messages
             {
@@ -39,8 +49,31 @@ namespace NochWeb.Controllers
             };
 
             MessageService.SendMessage(message);
+        }
 
-            return View("Index");
+        [HttpGet]
+        public JsonResult GetMessages(int channelId, int messageCount)
+        {
+            var messages = MessageService.GetMessages(channelId, messageCount);
+
+            var models = new List<MessageModel>();
+            foreach(var message in messages)
+            {
+                var model = new MessageModel
+                {
+                    MessageID = message.MessageID,
+                    ChannelID = message.ChannelID,
+                    UserID = message.UserID,
+                    Username = UserService.GetUsername(message.UserID),
+                    Content = message.Content,
+                    Timestamp = message.Timestamp,
+                    IsEdited = message.IsEdited,
+                    LastUpdated = message.UpdatedOn
+                };
+                models.Add(model);
+            }
+
+            return Json(models, JsonRequestBehavior.AllowGet);
         }
     }
 }
