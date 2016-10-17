@@ -93,6 +93,7 @@
     <Compile Include="Data\NochDBEntities.cs" />
     <Compile Include="Data\UserDomains.cs" />
     <Compile Include="Data\Users.cs" />
+    <Compile Include="MessageService.cs" />
     <Compile Include="Migrations\201609270355156_First.cs" />
     <Compile Include="Migrations\201609270355156_First.Designer.cs">
       <DependentUpon>201609270355156_First.cs</DependentUpon>

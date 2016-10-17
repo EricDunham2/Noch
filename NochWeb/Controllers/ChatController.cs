@@ -15,7 +15,29 @@ namespace NochWeb.Controllers
         public ActionResult Index()
         {
             Users user = (Users)HttpContext.Session["user"];
+            ViewBag.Title = "Chat";
+            ViewBag.Username = user.Username;
+            ViewBag.UserID = user.UserID;
+            
             return View();
+        }
+
+        public ActionResult SendMessage(int userId, int channelId, string msg)
+        {
+            Messages message = new Messages
+            {
+                UserID = userId,
+                ChannelID = channelId,
+                Content = msg,
+                Timestamp = DateTime.Now,
+                IsEdited = false,
+                UpdatedOn = DateTime.Now
+
+            };
+
+            MessageService.SendMessage(message);
+
+            return View("Index");
         }
     }
 }

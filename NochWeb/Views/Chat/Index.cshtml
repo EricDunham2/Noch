@@ -1,6 +1,6 @@
 ﻿@{
-	ViewBag.Title = "Chat";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewBag.User;
 }
 <div id="messageArea">
 	<ul id="discussion"></ul>
@@ -42,18 +42,38 @@
 			$('#discussion').append('<li><strong>' + encodedName
 				+ '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
 		};
+
 		// Get the user name and store it to prepend to messages.
 		$('#displayname').val(prompt('Enter your name:', ''));
 		// Set initial focus to message input box.
 		$('#message').focus();
 		// Start the connection.
 		$.connection.hub.start().done(function () {
-			$('#sendmessage').click(function () {
+		    $('#sendmessage').click(function () {
+		        // get some chat variables 
+		        var msg = $('#message').val();
+
 				// Call the Send method on the hub.
-				chat.server.send($('#displayname').val(), $('#message').val());
+		        chat.server.send('@ViewBag.Username', msg);
+
+		        // call the controller method to send the message to the database
+		        $.ajax({
+		            url: '@Url.Action("SendMessage", "Chat")',
+		            type: 'POST',
+		            data: JSON.stringify({
+		                userId: @ViewBag.UserID,
+		                channelId: 1,
+                        msg: msg
+		            }),
+		            dataType: 'json',
+		            contentType: 'application/json; charset=utf-8'
+		        });
+
 				// Clear text box and reset focus for next comment.
 				$('#message').val('').focus();
 			});
 		});
+
+        //send the message to the database
 	});
 </script>
