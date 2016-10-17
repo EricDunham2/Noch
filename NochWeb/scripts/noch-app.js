@@ -1,7 +1,9 @@
-﻿var chatViewModel = {
+﻿/* Knockout View Model */
+var chatViewModel = {
 	messages: ko.observableArray()
 };
 
+/* Object for accessing state info (it's passed through the script tag) */
 var VARS = VARS || (function () {
 	var _args = {}; // private
 
@@ -27,8 +29,8 @@ $(document).ready(function () {
 	// Create a function that the hub can call to broadcast messages.
 	chat.client.broadcastMessage = function (name, message) {
 
-		// push back messagees to observable array, which automatically updates the discussion ul
-		// you can see on the index page the 'data-bind' attribute that binds to this array
+		/* push back messagees to observable array, which automatically updates the discussion ul
+		   you can see on the index page the 'data-bind' attribute that binds to this array */
 		chatViewModel.messages.push({
 			name: name,
 			message: message
@@ -46,18 +48,11 @@ $(document).ready(function () {
 			var a = VARS;
 			chat.server.send(VARS.getUserName(), msg);
 
-			//call the controller method to send the message to the database
-			$.ajax({
-				url: '/Chat/SendMessage/',
-				type: 'POST',
-				data: JSON.stringify({
-					userId: VARS.getUserID(),
-					channelId: 1,
-					msg: msg
-				}),
-				dataType: 'json',
-				contentType: 'application/json; charset=utf-8'
-			});
+			saveMessage({
+				userId: VARS.getUserID(),
+				channelId: 1,
+				msg: msg
+			})
 
 			// Clear text box and reset focus for next comment.
 			$('#message').val('').focus();
@@ -66,3 +61,13 @@ $(document).ready(function () {
 
 	//send the message to the database
 });
+
+function saveMessage(msgInfo) {
+	return $.ajax({
+		url: '/Chat/SendMessage/',
+		type: 'POST',
+		data: JSON.stringify(msgInfo),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8'
+	});
+}
