@@ -43,11 +43,14 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
         left: 20px;
         li {
             list-style-type: none;
+            .msg-sender {
+                font-weight: bold; 
+            }
         }
     }
 }
 
-#inputArea {
+#inputArea { 
     position: absolute;
     right: 0;
     bottom: 0;

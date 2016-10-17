@@ -31,6 +31,8 @@
     left: 20px; }
     #messageArea ul#discussion li {
       list-style-type: none; }
+      #messageArea ul#discussion li .msg-sender {
+        font-weight: bold; }
 
 #inputArea {
   position: absolute;
