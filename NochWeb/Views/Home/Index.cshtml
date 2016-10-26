@@ -74,21 +74,7 @@
             }, new { @class = "form" }))
             {
                 @Html.AntiForgeryToken()
-
-
-
-                <div class="form-group form-group-lg">
-                    <div class="col-md-12">
-                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label splash-label" })
-                    </div>
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control splash-input input-lg input-lg" } })
-                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "validation-message" })
-                    </div>
-                </div>
-
-
-
+                
                 <div class="form-group form-group-lg">
                     <div class="col-md-12">
                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label splash-label" })
@@ -98,9 +84,7 @@
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validation-message" })
                     </div>
                 </div>
-
-
-
+                
                 <div class="form-group form-group-lg">
                     <div class="col-md-12">
                         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label splash-label" })
@@ -110,9 +94,7 @@
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "validation-message" })
                     </div>
                 </div>
-
-
-
+                
                 <div class="form-group form-group-lg">
                     <div class="col-md-12">
                         @Html.LabelFor(model => model.RepeatPassword, htmlAttributes: new { @class = "control-label splash-label" })
@@ -122,9 +104,7 @@
                         @Html.ValidationMessageFor(model => model.RepeatPassword, "", new { @class = "validation-message" })
                     </div>
                 </div>
-
-
-
+                
                 <div class="col-md-12 text-right">
                     <div class="form-group form-group-lg">
                         <input type="submit" class="btn btn-success btn-lg" value="Register" style="margin-top: 15px;" />
@@ -148,8 +128,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group-lg">
-                                <label>Username</label>
-                                <input name="username" class="form-control" id="loginUsername" />
+                                <label>Email</label>
+                                <input name="email" class="form-control" id="loginEmail" />
                             </div>
                             <div class="form-group-lg">
                                 <label>Password</label>

@@ -18,7 +18,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#startCode">Code</button>&nbsp;</li>
+                <li><button type="button" class="btn navbar-btn" onclick="@("window.location.href='" + @Url.Action("Index", "Account", @user) + "'");" >Account</button>&nbsp;</li>
                 <li><button type="button" class="btn btn-danger navbar-btn" id="signoutBtn">Sign-Out</button>&nbsp;</li>
             </ul>
         </div>

@@ -66,13 +66,13 @@ namespace NochWeb.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult SignInConfirm(string username, string password)
+        public ActionResult SignInConfirm(string email, string password)
         {
             Users userObject;
             using (_db)
             {
                 IQueryable<Users> query = from u in _db.Users
-                            where u.Username == username
+                            where u.Email == email
                             where u.Password == password
                             select u;
 
