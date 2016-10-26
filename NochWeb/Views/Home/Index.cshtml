@@ -1,161 +1,173 @@
 ﻿@model  NochWeb.Models.UserModel
-
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style type="text/css">
-	body {
-		background-image: url("../../Content/img/splashpage_bg.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-attachment:fixed;
-	}
-	/* Small Screens (tablets) */
-	@@media (max-width: 767px) {
-		body {
-			background-image: url("../../Content/img/splashpage_bg_phone.jpg");
-		}
-	}
-	@@media (min-width: 768px) {
-		body {
-			background-image: url("../../Content/img/splashpage_bg_ipad.jpg");
-		}
-	}
-	@@media (min-width: 992px) {
-		body {
-			background-image: url("../../Content/img/splashpage_bg.jpg");
-		}
-	}
+    body {
+        background-image: url("../../Content/img/splashpage_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    /* Small Screens (tablets) */
+    @@media (max-width: 767px) {
+        body {
+            background-image: url("../../Content/img/splashpage_bg_phone.jpg");
+        }
+    }
+
+    @@media (min-width: 768px) {
+        body {
+            background-image: url("../../Content/img/splashpage_bg_ipad.jpg");
+        }
+    }
+
+    @@media (min-width: 992px) {
+        body {
+            background-image: url("../../Content/img/splashpage_bg.jpg");
+        }
+    }
 </style>
 <form id="signout" action="Home/SignOutConfirm" method="post"></form>
 <nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
-		</div>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#signInModal">Sign-In</button>&nbsp;</li>
-				<li><button type="button" class="btn btn-danger navbar-btn" id="signoutBtn">Sign-Out</button>&nbsp;</li>
-			</ul>
-		</div>
-	</div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><button type="button" class="btn btn-success navbar-btn" data-toggle="modal" data-target="#signInModal">Sign-In</button>&nbsp;</li>
+                @if (Session["user"] != null)
+                {
+                    @:
+                    <li><button type="button" class="btn btn-danger navbar-btn" id="signoutBtn">Sign-Out</button>&nbsp;</li>
+                }
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-	<div class="col-md-12 text-center" style="padding-top:100px;">
-		<img src="~/Content/img/logo_white_300px_124px.png" />
-		<h1 class="splash-heading">Welcome to Noch</h1>
-		@if ( Session [ "key" ] != null )
-		{
-			@:<h1>Logged in as @Session [ "key" ]</h1>
+    <div class="col-md-12 text-center" style="padding-top:100px;">
+        <img src="~/Content/img/logo_white_300px_124px.png" />
+        <h1 class="splash-heading">Welcome to Noch</h1>
+        @if (Session["key"] != null)
+        {
+            @:<h1>Logged in as @Session [ "key" ]</h1>
 		}
-	</div>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			@using ( Ajax.BeginForm( "RegisterConfirm", "Home", new AjaxOptions
-			{
-				InsertionMode = InsertionMode.Replace,
-				HttpMethod = "POST",
-				LoadingElementId = "ajaxSplash",
-				UpdateTargetId = "ajaxMsg",
-				OnSuccess = "onSuccessorFailure",
-				OnFailure = "onSuccessorFailure"
-			}, new { @class = "form" } ) )
-			{
-				@Html.AntiForgeryToken()
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            @using (Ajax.BeginForm("RegisterConfirm", "Home", new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "POST",
+                LoadingElementId = "ajaxSplash",
+                UpdateTargetId = "ajaxMsg",
+                OnSuccess = "onSuccessorFailure",
+                OnFailure = "onSuccessorFailure"
+            }, new { @class = "form" }))
+            {
+                @Html.AntiForgeryToken()
 
-				<div class="form-group form-group-lg">
-					<div class="col-md-12">
-						@Html.LabelFor( model => model.Username, htmlAttributes: new { @class = "control-label splash-label" } )
-					</div>
-					<div class="col-md-12">
-						@Html.EditorFor( model => model.Username, new { htmlAttributes = new { @class = "form-control splash-input input-lg input-lg" } } )
-						@Html.ValidationMessageFor( model => model.Username, "", new { @class = "validation-message" } )
-					</div>
-				</div>
 
-				<div class="form-group form-group-lg">
-					<div class="col-md-12">
-						@Html.LabelFor( model => model.Email, htmlAttributes: new { @class = "control-label splash-label" } )
-					</div>
-					<div class="col-md-12">
-						@Html.EditorFor( model => model.Email, new { htmlAttributes = new { @class = "form-control splash-input input-lg" } } )
-						@Html.ValidationMessageFor( model => model.Email, "", new { @class = "validation-message" } )
-					</div>
-				</div>
 
-				<div class="form-group form-group-lg">
-					<div class="col-md-12">
-						@Html.LabelFor( model => model.Password, htmlAttributes: new { @class = "control-label splash-label" } )
-					</div>
-					<div class="col-md-12">
-						@Html.PasswordFor( model => model.Password, new { @class = "form-control splash-input input-lg" } )
-						@Html.ValidationMessageFor( model => model.Password, "", new { @class = "validation-message" } )
-					</div>
-				</div>
+                <div class="form-group form-group-lg">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label splash-label" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control splash-input input-lg input-lg" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "validation-message" })
+                    </div>
+                </div>
 
-				<div class="form-group form-group-lg">
-					<div class="col-md-12">
-						@Html.LabelFor( model => model.RepeatPassword, htmlAttributes: new { @class = "control-label splash-label" } )
-					</div>
-					<div class="col-md-12">
-						@Html.PasswordFor( model => model.RepeatPassword, new { @class = "form-control splash-input input-lg" } )
-						@Html.ValidationMessageFor( model => model.RepeatPassword, "", new { @class = "validation-message" } )
-					</div>
-				</div>
 
-				<div class="col-md-12 text-right">
-					<div class="form-group form-group-lg">
-						<input type="submit" class="btn btn-success btn-lg" value="Register" style="margin-top: 15px;" />
-					</div>
-				</div>
-			}
-		</div>
-	</div>
+
+                <div class="form-group form-group-lg">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label splash-label" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control splash-input input-lg" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validation-message" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group form-group-lg">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label splash-label" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control splash-input input-lg" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "validation-message" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group form-group-lg">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.RepeatPassword, htmlAttributes: new { @class = "control-label splash-label" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.PasswordFor(model => model.RepeatPassword, new { @class = "form-control splash-input input-lg" })
+                        @Html.ValidationMessageFor(model => model.RepeatPassword, "", new { @class = "validation-message" })
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 text-right">
+                    <div class="form-group form-group-lg">
+                        <input type="submit" class="btn btn-success btn-lg" value="Register" style="margin-top: 15px;" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-@using ( Html.BeginForm( "SignInConfirm", "Home" ) )
+@using (Html.BeginForm("SignInConfirm", "Home"))
 {
-	<div id="signInModal" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-sm">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"><img src="~/Content/img/icon_bw.png" style="width:16px;" />&nbsp;Sign In</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group-lg">
-								<label>Username</label>
-								<input name="username" class="form-control" id="loginUsername" />
-							</div>
-							<div class="form-group-lg">
-								<label>Password</label>
-								<input name="password" class="form-control" id="loginPassword" type="password" />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<div class="form-group-lg">
-						<input type="submit" class="btn btn-success" value="Sign In" />
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
+    <div id="signInModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><img src="~/Content/img/icon_bw.png" style="width:16px;" />&nbsp;Sign In</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group-lg">
+                                <label>Username</label>
+                                <input name="username" class="form-control" id="loginUsername" />
+                            </div>
+                            <div class="form-group-lg">
+                                <label>Password</label>
+                                <input name="password" class="form-control" id="loginPassword" type="password" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group-lg">
+                        <input type="submit" class="btn btn-success" value="Sign In" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-
 <script>
 	$(document).ready(function () {
 		$('#signoutBtn').click(function () {

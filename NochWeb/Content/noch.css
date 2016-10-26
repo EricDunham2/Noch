@@ -3,37 +3,47 @@
   left: 0;
   right: 0;
   bottom: 0;
-  top: 0; }
+  top: 0;
+  //background-color: #e9e9e9;
+
+}
 
 #sideBar {
   position: absolute;
   left: 0;
-  top: 0;
+  top: 50px;
   bottom: 0;
   width: 250px;
-  background-color: #ffeb3b;
-  -webkit-box-shadow: 0px 0px 8px 0px #bba700;
-  -moz-box-shadow: 0px 0px 8px 0px #bba700;
-  box-shadow: 0px 0px 8px 0px #bba700; }
+  background-color: #214444;
+  -webkit-box-shadow: 0px 0px 8px 0px #216666;
+  -moz-box-shadow: 0px 0px 8px 0px #216666;
+  box-shadow: 0px 0px 8px 0px #216666; }
 
 #channels .sidebar-heading {
   font-size: 18px;
-  font-weight: bold; }
+  font-weight: bold;
+  color:#ADD;
+}
 #channels .sidebar-item {
   transition: all 200ms ease-out;
-  margin-left: 1em; }
+  margin-left: 1em; 
+  color:#FFF;
+}
+
   #channels .sidebar-item:hover {
     cursor: pointer;
-    color: #ff5252; }
+    color: #00FFFF; }
 
 #messageArea {
-  position: absolute;
-  left: 250px;
-  right: 0;
-  bottom: 56px;
-  top: 0;
-  overflow-y: scroll;
-  background-color: #e9e9e9; }
+    position:relative;
+    float:left;
+    height:100%;
+    width:50%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: #e9e9e9; 
+    color:#212121;
+}
   #messageArea ul#discussion {
     padding: 0;
     position: absolute;
@@ -44,16 +54,37 @@
       #messageArea ul#discussion li .msg-sender {
         font-weight: bold; }
 
+#codeArea{
+    position:relative;
+    float:left;
+    height:100%;
+    width:50%;
+    background-color: #212121;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#parent{
+  position: absolute;
+  left: 250px;
+  right: 0;
+  bottom: 56px;
+  top: 0;
+  background-color: #e9e9e9;
+}
+
+
+
 #inputArea {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 250px;
   height: 56px;
-  background-color: #ffeb3b;
-  -webkit-box-shadow: 8px 0px 8px 0px #bba700;
-  -moz-box-shadow: 8px 0px 8px 0px #bba700;
-  box-shadow: 8px 0px 8px 0px #bba700; }
+  background-color: #214444;
+  -webkit-box-shadow: 8px 0px 8px 0px #216666;
+  -moz-box-shadow: 8px 0px 8px 0px #216666;
+  box-shadow: 8px 0px 8px 0px #216666; }
   #inputArea #messageContainer {
     position: absolute;
     left: 0px;
@@ -69,16 +100,16 @@
     #inputArea #sendBtnContainer .send-btn {
       width: 100%;
       height: 100%;
-      background-color: #ff5252;
+      background-color: #214444;
       border: none;
       color: #ffffff;
       font-size: 1.2em;
       transition: background-color 150ms ease-out; }
       #inputArea #sendBtnContainer .send-btn:hover {
-        background-color: #ff3939; }
+        background-color: #214444; }
       #inputArea #sendBtnContainer .send-btn:active {
         outline: none;
-        background-color: #ff1f1f; }
+        background-color: #216666; }
       #inputArea #sendBtnContainer .send-btn:focus {
         outline: none; }
 
@@ -124,6 +155,55 @@
 
 .form-control.input-validation-error {
   border: 1px solid #ff5252; }
+
+.navbar
+{
+    background-color: #214444;
+} 
+.panel-container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid silver;
+  overflow: hidden;
+  
+  /* avoid browser level touch actions */
+  xtouch-action: none;
+}
+
+.panel-left {
+  flex: 0 0 auto;
+  /* only manually resize */
+  padding: 10px;
+  width: 300px;
+  min-height: 200px;
+  min-width: 150px;
+  white-space: nowrap;
+  background: #838383;
+  color: white;
+}
+
+.splitter {
+  flex: 0 0 auto;
+  width: 18px;  
+  background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+  min-height: 200px;
+  cursor: col-resize;  
+}
+
+.panel-right {
+  flex: 1 1 auto;
+  /* resizable */
+  padding: 10px;
+  width: 100%;
+  min-height: 200px;
+  min-width: 200px;
+  background: #eee;
+}
+
+
+
+
+
 
 /* Extra-Small Screens (phones) */
 /* Small Screens (tablets) */

@@ -1,22 +1,55 @@
 ﻿@using NochDAL.Data
 @model List<Domains>
-
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var user = ViewBag.User;
 }
-<div id="messageArea">
-	<ul id="discussion" data-bind="foreach: messages">
-		<li>
-			<span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
-		</li>
-	</ul>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#startCode">Code</button>&nbsp;</li>
+                <li><button type="button" class="btn btn-danger navbar-btn" id="signoutBtn">Sign-Out</button>&nbsp;</li>
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="parent">
+
 </div>
+<div id="parent" class="panel-container">
+
+
+    <div id="messageArea" class="panel-left">
+        <ul id="discussion" data-bind="foreach: messages">
+            <li>
+                <span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="splitter">
+    </div>
+    <div id="codeArea" class="panel-right">
+
+    </div>
+</div>
+
+
 <div id="sideBar">
     @foreach (var domain in Model)
     {
         <div class="col-xs-12" id="channels">
-			<span class="sidebar-heading">@domain.Name</span>
+            <span class="sidebar-heading">@domain.Name</span>
             @foreach (var channel in domain.Channels)
             {
                 <br />
@@ -27,24 +60,24 @@
     }
 </div>
 <div id="inputArea">
-	<div id="messageContainer">
+    <div id="messageContainer">
         <input class="input-lg form-control" type="text" id="message" />
     </div>
-	<div id="sendBtnContainer">
-		<button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-	</div>
+    <div id="sendBtnContainer">
+        <button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+    </div>
 </div>
 <div class="dropdown" id="mobileChatNav">
-	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		<i class="fa fa-bars fa-2x" aria-hidden="true"></i>
-	</button>
-	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		<li><a href="#">Channels</a></li>
-		<li><a href="#">Another action</a></li>
-		<li><a href="#">Something else here</a></li>
-		<li role="separator" class="divider"></li>
-		<li><a href="#">Separated link</a></li>
-	</ul>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Channels</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
 </div>
 <input type="hidden" id="displayname" />
 <script src="~/scripts/knockout-3.4.0.js"></script>
@@ -52,4 +85,15 @@
 <script type="text/javascript">
 	VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
 </script>
-<script src="@Url.Content("~/scripts/test.js")"></script>
+<script src="https://rawgit.com/RickStrahl/jquery-resizable/master/src/jquery-resizable.js"></script>
+<script>
+    $(".panel-left").resizable({
+        handleSelector: ".splitter",
+        resizeHeight: false
+    });
+    $(".panel-top").resizable({
+        handleSelector: ".splitter-horizontal",
+        resizeWidth: false
+    });
+
+</script>
