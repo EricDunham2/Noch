@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 using NochDAL.Data;
+using NochWeb.Models;
+
 
 namespace NochWeb.Controllers
 {
@@ -17,9 +20,11 @@ namespace NochWeb.Controllers
             return View();
         }
 
-        public async Task<ActionResult> SaveAccountSettings(UserModel user)
+        public ActionResult SaveAccountSettings(UserModel user)
         {
-            
+
+
+            return View();
         }
     }
 }
