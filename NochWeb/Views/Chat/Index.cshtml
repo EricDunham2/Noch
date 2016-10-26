@@ -24,9 +24,7 @@
         </div>
     </div><!-- /.container-fluid -->
 </nav>
-<div id="parent">
 
-</div>
 <div id="parent" class="panel-container">
 
 
@@ -46,19 +44,22 @@
 
 
 <div id="sideBar">
+    <span style="color:white"><h3>Domains</h3></span>
+    <span style="color:white; padding-left:20px;" onclick="CreateDomain(newDomainName)"><h4>Add Domain</h4></span>
     @foreach (var domain in Model)
     {
-        <div class="col-xs-12" id="channels">
-            <span class="sidebar-heading">@domain.Name</span>
-            @foreach (var channel in domain.Channels)
-            {
-                <br />
-                <span class="sidebar-item" onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</span>
-            }
-        </div>
-        <br />
+        var dName = domain.Name;
+        dName = dName.Replace(' ', '_');
+        <div class="dropdownHeader" data-toggle="collapse" data-target="#@dName"> @domain.Name </div>
+            <div id="@dName" class="collapse dropdownMenu">
+                @foreach (var channel in domain.Channels)
+                {
+                    <div class="dropdownItem" onclick="getChannelMessages(@channel.ChannelID)"><a class="sidebar-item panel-body">@channel.Name</a></div>
+                }
+            </div>
     }
 </div>
+
 <div id="inputArea">
     <div id="messageContainer">
         <input class="input-lg form-control" type="text" id="message" />
@@ -95,5 +96,5 @@
         handleSelector: ".splitter-horizontal",
         resizeWidth: false
     });
-
 </script>
+

@@ -116,6 +116,24 @@ function getChannelMessages(channelId) {
     });
 };
 
+
+
+function saveMessage(name) {
+    return $.ajax({
+        url: '/Chat/MakeDomain/',
+        type: 'POST',
+        data: JSON.stringify(name, VARS.getUserID()),
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8'
+    });
+}
+
+
+
+
+
+
+
 function saveMessage(msgInfo) {
     return $.ajax({
         url: '/Chat/SendMessage/',

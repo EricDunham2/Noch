@@ -58,6 +58,11 @@ namespace NochWeb.Controllers
             MessageService.SendMessage(message);
         }
 
+        public void MakeDomain(string newDomain, int userid)
+        {
+            DomainService.MakeDomain(newDomain,userid);
+        }
+
         [HttpGet]
         public JsonResult GetMessages(int channelId, int messageCount)
         {
