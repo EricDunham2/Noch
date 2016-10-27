@@ -55,7 +55,11 @@
     {
         var dName = domain.Name;
         dName = dName.Replace(' ', '_');
-        <div class="dropdownHeader" data-toggle="collapse" data-target="#@dName"> @domain.Name </div>
+
+        <div class="dropdownHeader"  style="width:250px; line-height:44px; ">
+                     <div class="domainDD" data-toggle="collapse" data-target="#@dName">@domain.Name</div>
+                     <div class="addChannel" data="@domain.DomainID" onclick="makeChannel('@dName')"><span class="fa fa-plus add-ico"></span></div>
+        </div>
             <div id="@dName" class="collapse dropdownMenu">
                 @foreach (var channel in domain.Channels)
                 {
@@ -91,6 +95,8 @@
 <script type="text/javascript">
 	VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
 </script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://rawgit.com/RickStrahl/jquery-resizable/master/src/jquery-resizable.js"></script>
 <script>
     $(".panel-left").resizable({
@@ -101,5 +107,21 @@
         handleSelector: ".splitter-horizontal",
         resizeWidth: false
     });
+
+    function makeChannel(target) {
+       /* var dropdown = document.getElementById(target);
+        var div = document.createElement("div");
+        div.setAttribute("class","dropdownItem")
+        div.setAttribute("style","padding:0;")
+
+        var input = document.createElement("input")
+            input.setAttribute("class","form-control")
+            input.setAttribute("id","newChannelTemp")
+            input.setAttribute("style","margin:0 auto; width:150px;")
+            input.setAttribute("placeholder","New Channel Name")
+            div.appendChild(input)
+            dropdown.appendChild(div)*/
+
+    }
 </script>
 

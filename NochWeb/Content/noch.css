@@ -209,13 +209,31 @@
     margin: 0 auto;
 	text-align: left;
 	line-height: 44px;
-	margin-right: 68px;
 	font-size: 1em;
 	color: #FFF;
     cursor: pointer;
     outline: none;
-    padding-left:20px;
 }	
+
+.addChannel{
+    width:50px;
+    height:44px;
+    color:rgba(255,255,255,0.8);
+    float:left;
+    text-align:center;
+}
+
+.add-ico{
+    line-height:44px;
+}
+
+.domainDD{
+    width:180px; 
+    float:left;
+    padding-left:20px;
+    font-size:20px;
+}
+
 .dropdownHeader .dropdownMenu{
 	/* Size & position */
     position: absolute;
