@@ -44,8 +44,13 @@
 
 
 <div id="sideBar">
-    <span style="color:white"><h3>Domains</h3></span>
-    <span style="color:white; padding-left:20px;" onclick="CreateDomain(newDomainName)"><h4>Add Domain</h4></span>
+    <span style="color:white">
+        <h3 style="float:left; width:250px;">Domains</h3>
+    </span>
+    <div class="input-group" style="padding:10px;">
+        <input type="text" class="form-control" id="newDomainName" placeholder="New Domain" aria-describedby="basic-addon2">
+        <span class="input-group-addon" id="basic-addon2" onclick="makeDomain(document.getElementById('newDomainName').value)">Add Domain</span>
+    </div>
     @foreach (var domain in Model)
     {
         var dName = domain.Name;

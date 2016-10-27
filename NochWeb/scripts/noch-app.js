@@ -118,20 +118,21 @@ function getChannelMessages(channelId) {
 
 
 
-function saveMessage(name) {
+function makeDomain(name) {
     return $.ajax({
         url: '/Chat/MakeDomain/',
         type: 'POST',
-        data: JSON.stringify(name, VARS.getUserID()),
+        data: JSON.stringify({ newDomain: name, userid: VARS.getUserID() }),
         dataType: 'json',
-        contentType: 'application/json; charset=utf-8'
+        contentType: 'application/json; charset=utf-8',
+        success: function () {
+           
+        },
+        error: function (request, status, error) {
+            alert(request.responseText);
+        }
     });
 }
-
-
-
-
-
 
 
 function saveMessage(msgInfo) {
