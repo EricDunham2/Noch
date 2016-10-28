@@ -55,16 +55,18 @@
     {
         var dName = domain.Name;
         dName = dName.Replace(' ', '_');
+        var InputDid = dName+"Input";
 
         <div class="dropdownHeader"  style="width:250px; line-height:44px; ">
                      <div class="domainDD" data-toggle="collapse" data-target="#@dName">@domain.Name</div>
-                     <div class="addChannel" data="@domain.DomainID" onclick="makeChannel('@dName')"><span class="fa fa-plus add-ico"></span></div>
+                     <div class="addChannel"  onclick="makeChannel(document.getElementById('@InputDid').value, @domain.DomainID)"><span class="fa fa-plus-circle add-ico"></span></div>
         </div>
             <div id="@dName" class="collapse dropdownMenu">
                 @foreach (var channel in domain.Channels)
                 {
                     <div class="dropdownItem" onclick="getChannelMessages(@channel.ChannelID)"><a class="sidebar-item panel-body">@channel.Name</a></div>
                 }
+                <input type="text" class="form-control" id="@InputDid" placeholder="New Domain" aria-describedby="basic-addon2">
             </div>
     }
 </div>
@@ -108,20 +110,5 @@
         resizeWidth: false
     });
 
-    function makeChannel(target) {
-       /* var dropdown = document.getElementById(target);
-        var div = document.createElement("div");
-        div.setAttribute("class","dropdownItem")
-        div.setAttribute("style","padding:0;")
-
-        var input = document.createElement("input")
-            input.setAttribute("class","form-control")
-            input.setAttribute("id","newChannelTemp")
-            input.setAttribute("style","margin:0 auto; width:150px;")
-            input.setAttribute("placeholder","New Channel Name")
-            div.appendChild(input)
-            dropdown.appendChild(div)*/
-
-    }
 </script>
 

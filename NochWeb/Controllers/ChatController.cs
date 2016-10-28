@@ -76,8 +76,23 @@ namespace NochWeb.Controllers
                 DomainID  = -1
             };
             DomainService.MakeDomain(d,ud);
-            Index();
         }
+
+        public ActionResult MakeChannel(string name, int did)
+        {
+
+            Channels c = new Channels
+            {
+                DomainID = did,
+                Name = name,
+                CreatedOn = DateTime.Now,
+                UpdatedOn = DateTime.Now
+            };
+
+            ChannelService.MakeChannel(c);
+            return View();
+        }
+
 
         [HttpGet]
         public JsonResult GetMessages(int channelId, int messageCount)
