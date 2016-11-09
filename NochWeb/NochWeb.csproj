@@ -177,6 +177,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\noch - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\noch - Web Deploy.pubxml" />
     <None Include="scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="scripts\jquery-3.1.0.js" />
     <Content Include="scripts\jquery-3.1.0.min.js" />
