@@ -29,5 +29,18 @@ namespace NochDAL
                 return channels;
             }
         }
+
+        public static void MakeChannel(Channels c)
+        {
+            using (NochDBEntities _db = new NochDBEntities())
+            {
+                try
+                {
+                    _db.Channels.Add(c);
+                    _db.SaveChanges();
+                }
+                catch (Exception ex) { }
+            }
+        }
     }
 }

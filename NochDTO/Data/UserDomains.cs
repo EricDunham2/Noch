@@ -9,11 +9,10 @@ namespace NochDAL.Data
     public partial class UserDomains
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserDomainID { get; set; }
 
         public int UserID { get; set; }
-
+        
         public int DomainID { get; set; }
 
         public virtual Domains Domains { get; set; }

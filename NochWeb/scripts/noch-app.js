@@ -116,6 +116,36 @@ function getChannelMessages(channelId) {
     });
 };
 
+function makeDomain(name) {
+    return $.ajax({
+        url: '/Chat/MakeDomain/',
+        type: 'POST',
+        data: JSON.stringify({ newDomain: name, userid: VARS.getUserID() }),
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function () {         
+        },
+        error: function (request, status, error) {
+            console.log(error)
+        }
+    });
+}
+
+function makeChannel(nameIn, domainid) {
+    return $.ajax({
+        url: '/Chat/MakeChannel/',
+        type: 'POST',
+        data: JSON.stringify({ name: nameIn, did:domainid }),
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function () {
+        },
+        error: function (request, status, error) {
+            console.log(error)
+        }
+    });
+}
+
 function saveMessage(msgInfo) {
     return $.ajax({
         url: '/Chat/SendMessage/',

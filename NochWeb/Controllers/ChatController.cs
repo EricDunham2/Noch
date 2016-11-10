@@ -33,11 +33,12 @@ namespace NochWeb.Controllers
                 }
 
                 // set default channel if there isnt one
-                if (Session["currchannel"] == null && domains.Count > 0)
-                    Session["currchannel"] = domains[0].Channels.ElementAt(0).ChannelID;
-                else if (domains.Count == 0)
-                    return RedirectToAction("Index", "New");
-
+                int idxd = 0;
+                while (Session["currchannel"] == null){
+                    if(domains[idxd].Channels.Count != 0)
+                        Session["currchannel"] = domains[idxd].Channels.ElementAt(0).ChannelID;
+                    ++idxd;
+                }
                 return View(domains);
             }
             else
@@ -59,6 +60,39 @@ namespace NochWeb.Controllers
 
             MessageService.SendMessage(message);
         }
+
+        public void MakeDomain(string newDomain, int userid)
+        {
+
+            Domains d = new Domains
+            {
+                Name = newDomain,
+                UpdatedOn = DateTime.Now
+            };
+
+            UserDomains ud = new UserDomains
+            {
+                UserID = userid,
+                DomainID  = -1
+            };
+            DomainService.MakeDomain(d,ud);
+        }
+
+        public ActionResult MakeChannel(string name, int did)
+        {
+
+            Channels c = new Channels
+            {
+                DomainID = did,
+                Name = name,
+                CreatedOn = DateTime.Now,
+                UpdatedOn = DateTime.Now
+            };
+
+            ChannelService.MakeChannel(c);
+            return View();
+        }
+
 
         [HttpGet]
         public JsonResult GetMessages(int channelId, int messageCount)
