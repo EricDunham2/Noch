@@ -4,25 +4,24 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	var user = ViewBag.User;
 }
-
-<nav class="navbar navbar-default navbar-fixed-top chat-nav">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
-		</div>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#startCode">Code</button>&nbsp;</li>
-				<li><button type="button" class="btn btn-danger navbar-btn" id="signoutBtn">Sign-Out</button>&nbsp;</li>
-			</ul>
-		</div>
-	</div><!-- /.container-fluid -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><input type="button" class="btn navbar-btn" data-toggle="modal" data-target="#startCode" value="Account"/>&nbsp;</li>
+                <li><input type="button" class="btn btn-danger navbar-btn" id="signoutBtn" onclick="location.href='@Url.Action("SignOut", "Chat")'" value="Sign Out"/>&nbsp;</li>
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
 </nav>
 <div id="messageArea" class="panel-left">
 	<ul id="discussion" data-bind="foreach: messages">

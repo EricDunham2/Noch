@@ -42,7 +42,15 @@ namespace NochWeb.Controllers
                 return View(domains);
             }
             else
-                return Redirect("Home/Index");
+                return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult SignOut()
+        {
+            Users user = (Users)HttpContext.Session["user"];
+            if (user != null)
+                Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
 
         public void SendMessage(int userId, int channelId, string msg)

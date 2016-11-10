@@ -31,7 +31,7 @@ namespace NochDAL
             }
         }
 
-        public static void MakeDomain(Domains d, UserDomains ud)
+        public static int MakeDomain(Domains d, UserDomains ud)
         {
             using (NochDBEntities _db = new NochDBEntities())
             {
@@ -45,9 +45,13 @@ namespace NochDAL
                     _db.UserDomains.Add(ud);
                     _db.SaveChanges();
 
+                    return d.DomainID;
+
                 }
                 catch (Exception ex) { }
             }
+
+            return -1;
         }
     }
 }
