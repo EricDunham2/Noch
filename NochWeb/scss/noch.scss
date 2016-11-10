@@ -2,8 +2,11 @@ $splashTextColor: #ffffff;
 $text: #000000;
 $sidebarColor: #ffeb3b;
 $siteRed: #ff5252;
+$sidebarText: darken($siteRed, 15%);
 $buttonText: #ffffff;
 $greyBackground: #e9e9e9;
+$nochSuccess: #2cbd57;
+$nochBlue: #29859f;
 $serif: "Libre Baskerville", georgia, serif;
 $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
 
@@ -18,21 +21,85 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
 #sideBar {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 50px;
     bottom: 0;
-    width: 250px;
+    width: 280px;
     background-color: $sidebarColor;
     -webkit-box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
     -moz-box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
     box-shadow: 0px 0px 8px 0px darken($sidebarColor, 25%);
 }
 
+#channels {
+    .sidebar-heading {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .sidebar-item {
+        transition: all 200ms ease-out;
+        margin-left: 1em;
+
+        &:hover {
+            cursor: pointer;
+            color: $siteRed;
+        }
+    }
+}
+
+.huge-btn, .huge-input {
+    padding: 12px 20px;
+    font-size:1.4em;
+    height:auto;
+}
+
+.noch-success {
+    background-color: $nochSuccess;
+    color: #ffffff;
+}
+
+.noch-blue {
+    background-color: $nochBlue;
+    color: #ffffff;
+}
+
+.btn.noch-success {
+
+}
+
+
+.huge-input-group {
+    display: table;
+    border-collapse: separate;
+    position:relative;
+    max-width:100%;
+    width:100%;
+    .huge-input-addon {
+        display: table-cell;
+        padding:0;
+        position:relative;
+        .huge-btn {
+            border:none;
+            margin-top:-46px;
+            margin-bottom:-1px;
+            display:inline;
+            width:100%;
+        }
+    }
+    .form-control.huge-input {
+        width:100%;
+        display: table-cell;
+        float:left;
+        position:relative;
+    }
+}
+
 #messageArea {
     position: absolute;
-    left: 250px;
+    left: 280px;
     right: 0;
     bottom: 56px;
-    top: 0;
+    top: 50px;
     overflow-y: scroll;
     background-color: $greyBackground;
 
@@ -41,8 +108,13 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
         position: absolute;
         bottom: 10px;
         left: 20px;
+
         li {
             list-style-type: none;
+
+            .msg-sender {
+                font-weight: bold;
+            }
         }
     }
 }
@@ -51,7 +123,7 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     position: absolute;
     right: 0;
     bottom: 0;
-    left: 250px;
+    left: 280px;
     height: 56px;
     background-color: $sidebarColor;
     -webkit-box-shadow: 8px 0px 8px 0px darken($sidebarColor, 25%);
@@ -124,6 +196,11 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     }
 }
 
+.no-padding {
+    padding-left:0 !important;
+    padding-right:0 !important;
+}
+
 .form-control.splash-input {
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
@@ -147,15 +224,51 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     padding: 0.3em;
     display: block;
     margin: 10px 0;
+
     &:empty {
-        display:none;
+        display: none;
     }
+}
+
+.navbar.chat-nav {}
+
+.list-group {
+    .list-group-item {
+        &:hover {
+            cursor: pointer;
+        }
+
+        font-weight: bold;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid $sidebarColor;
+        &:last-of-type {
+            border-bottom: 1px solid $sidebarColor;
+        }
+    }
+}
+
+.item-list {
+    padding-left: 15px;
+    list-style-type: none;
+
+    .item {
+        padding: 7px 0;
+
+        a {
+            color: lighten($sidebarText, 10%);
+        }
+    }
+}
+
+.badge {
+    background-color: $siteRed;
+    color:#ffffff;
 }
 
 .form-control.input-validation-error {
     border: 1px solid $siteRed;
 }
-
 
 /* Extra-Small Screens (phones) */
 @media (max-width: 767px) {}
@@ -193,20 +306,22 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
     #mobileChatNav {
         display: inline;
         position: absolute;
-        top:10px;
-        left:10px;
+        top: 10px;
+        left: 10px;
+
         button, ul {
             background-color: $siteRed;
             color: $buttonText;
+
             li a, li {
                 color: $buttonText;
+
                 &:active, &:hover {
                     background-color: $sidebarColor;
                     color: $siteRed;
                 }
             }
         }
-
     }
 }
 
@@ -219,16 +334,7 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
 
 /* Large Screens */
 @media (min-width: 1200px) {
-        #mobileChatNav {
+    #mobileChatNav {
         display: none;
     }
 }
-
-
-
-
-
-
-
-
-
