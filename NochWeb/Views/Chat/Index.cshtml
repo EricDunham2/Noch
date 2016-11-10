@@ -5,7 +5,7 @@
     var user = ViewBag.User;
 }
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top chat-nav">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -24,51 +24,50 @@
         </div>
     </div><!-- /.container-fluid -->
 </nav>
+<div id="messageArea" class="panel-left">
+    <ul id="discussion" data-bind="foreach: messages">
+        <li>
+            <span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
+        </li>
+    </ul>
+</div>
+<div id="sideBar">
+    <div class="col-md-12">
+        <h2>Domains</h2>
+    </div>
+    <div class="col-md-12">
+        <div class="input-group" style="padding:10px;">
+            <input type="text" class="form-control" id="newDomainName" placeholder="New Domain" aria-describedby="basic-addon2">
+            <span class="input-group-addon" onclick="makeDomain(document.getElementById('newDomainName').value)">Add Domain</span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <ul class="list-group">
+            @foreach (var domain in Model)
+            {
+                var dName = domain.Name;
+                dName = dName.Replace(' ', '_');
+                var InputDid = dName + "Input";
 
-<div id="parent" class="panel-container">
-
-
-    <div id="messageArea" class="panel-left">
-        <ul id="discussion" data-bind="foreach: messages">
-            <li>
-                <span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
-            </li>
+                <li class="list-group-item">
+                    <span class="list-group-text" data-toggle="collapse" data-target="#@dName">@domain.Name</span>
+                    <div id="@dName" class="collapse">
+                        <ul class="item-list">
+                            @foreach (var channel in domain.Channels)
+                            {
+                                <li class="item"><a onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</a></li>
+                            }
+                        </ul>
+                        <div class="input-group" style="margin:10px 0">
+                            <input type="text" class="form-control" id="@InputDid" placeholder="New Channel" aria-describedby="basic-addon2">
+                            <span class="input-group-addon" onclick="makeChannel(document.getElementById('@InputDid').value, @domain.DomainID)"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        </div>
+                        
+                    </div>
+                </li>
+            }
         </ul>
     </div>
-    <div class="splitter">
-    </div>
-    <div id="codeArea" class="panel-right">
-
-    </div>
-</div>
-
-
-<div id="sideBar">
-    <span style="color:white">
-        <h3 style="float:left; width:250px;">Domains</h3>
-    </span>
-    <div class="input-group" style="padding:10px;">
-        <input type="text" class="form-control" id="newDomainName" placeholder="New Domain" aria-describedby="basic-addon2">
-        <span class="input-group-addon" id="basic-addon2" onclick="makeDomain(document.getElementById('newDomainName').value)">Add Domain</span>
-    </div>
-    @foreach (var domain in Model)
-    {
-        var dName = domain.Name;
-        dName = dName.Replace(' ', '_');
-        var InputDid = dName+"Input";
-
-        <div class="dropdownHeader"  style="width:250px; line-height:44px; ">
-                     <div class="domainDD" data-toggle="collapse" data-target="#@dName">@domain.Name</div>
-                     <div class="addChannel"  onclick="makeChannel(document.getElementById('@InputDid').value, @domain.DomainID)"><span class="fa fa-plus-circle add-ico"></span></div>
-        </div>
-            <div id="@dName" class="collapse dropdownMenu">
-                @foreach (var channel in domain.Channels)
-                {
-                    <div class="dropdownItem" onclick="getChannelMessages(@channel.ChannelID)"><a class="sidebar-item panel-body">@channel.Name</a></div>
-                }
-                <input type="text" class="form-control" id="@InputDid" placeholder="New Domain" aria-describedby="basic-addon2">
-            </div>
-    }
 </div>
 
 <div id="inputArea">
@@ -95,7 +94,7 @@
 <script src="~/scripts/knockout-3.4.0.js"></script>
 <script src="~/scripts/noch-app.js"></script>
 <script type="text/javascript">
-	VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
+    VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
 </script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
