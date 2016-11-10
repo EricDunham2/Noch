@@ -69,6 +69,11 @@ namespace NochWeb.Controllers
             MessageService.SendMessage(message);
         }
 
+        public void UpdateMessage(int userId, int msgId, int channelId, string msg)
+        {
+            MessageService.UpdateMessage(userId, msgId, channelId, msg);
+        }
+
         public void MakeDomain(string newDomain, int userid)
         {
 

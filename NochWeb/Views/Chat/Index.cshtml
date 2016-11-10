@@ -31,7 +31,8 @@
     <div id="messageArea" class="panel-left">
         <ul id="discussion" data-bind="foreach: messages">
             <li>
-                <span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
+                <input class="msgid" type="hidden" data-bind="value: $data.id" />
+                <span class="msg-sender" data-bind="text: $data.name" ></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message" ></span>
             </li>
         </ul>
     </div>
