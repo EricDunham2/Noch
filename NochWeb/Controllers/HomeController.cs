@@ -17,9 +17,16 @@ namespace NochWeb.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Title = "Noch";
+            Users user = (Users)HttpContext.Session["user"];
 
-            return View();
+            if (user == null)
+            {
+                ViewBag.Title = "Noch";
+
+                return View();
+            }
+            else
+                return RedirectToAction("Index","Chat");
         }
 
         public ActionResult Chat(UserModel user)
