@@ -33,32 +33,35 @@ namespace NochWeb.Controllers
         public async Task<ActionResult> RegisterConfirm(UserModel model)
         {
             // determine if new domain was created
-
-            try
+            if (ModelState.IsValid)
             {
-                Users user = new Users()
+                try
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Username = model.Username,
-                    Password = model.Password,
-                    Email = model.Email,
-                    IsEmailConfirmed = false,
-                    Phone = model.Phone,
-                    Address = model.Address,
-                    City = model.City,
-                    Province = model.Province,
-                    Country = model.Country,
-                    PostalCode = model.PostalCode,
-                    CreatedOn = DateTime.Now,
-                    UpdatedOn = DateTime.Now
-                };
+                    Users user = new Users()
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Username = model.Username,
+                        Password = model.Password,
+                        Email = model.Email,
+                        IsEmailConfirmed = false,
+                        Phone = model.Phone,
+                        Address = model.Address,
+                        City = model.City,
+                        Province = model.Province,
+                        Country = model.Country,
+                        PostalCode = model.PostalCode,
+                        CreatedOn = DateTime.Now,
+                        UpdatedOn = DateTime.Now
+                    };
 
-                UserService.Register(user);
+                    UserService.Register(user);
 
-				return View("Index");
+                    return View("Index");
+                }
+                catch (Exception ex) { return View(); }
             }
-            catch (Exception ex) { return View(); }
+            return View("Index", model);
         }
 
         [AllowAnonymous]

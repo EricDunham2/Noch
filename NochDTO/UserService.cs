@@ -8,7 +8,7 @@ using NochDAL.Data;
 namespace NochDAL
 {
 
-    public class UserService : ServiceBase
+    public class UserService : BaseService
     {
         public static void Register(Users user)
         {
@@ -19,8 +19,27 @@ namespace NochDAL
                     _db.Users.Add(user);
                     _db.SaveChanges();
                 }
-                catch(Exception ex) { }
+                catch (Exception ex) { }
             }
+        }
+
+        public static string GetUsername(int userId)
+        {
+            string username = "";
+            using (NochDBEntities _db = new NochDBEntities())
+            {
+                try
+                {
+                    var query = from u in _db.Users
+                                  where u.UserID == userId
+                                  select u.Username;
+
+                    username = query.FirstOrDefault();
+                }
+                catch (Exception ex) { }
+            }
+
+            return username;
         }
     }
 }

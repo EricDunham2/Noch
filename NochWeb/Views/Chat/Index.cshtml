@@ -1,48 +1,99 @@
-﻿@{
-	ViewBag.Title = "Chat";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using NochDAL.Data
+@model List<Domains>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewBag.User;
 }
-<div id="messageArea">
-	<ul id="discussion"></ul>
-</div>
-<div id="sideBar">
 
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#startCode">Code</button>&nbsp;</li>
+                <li><button type="button" class="btn btn-danger navbar-btn" id="signoutBtn">Sign-Out</button>&nbsp;</li>
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+<div id="parent">
+
+</div>
+<div id="parent" class="panel-container">
+
+
+    <div id="messageArea" class="panel-left">
+        <ul id="discussion" data-bind="foreach: messages">
+            <li>
+                <span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="splitter">
+    </div>
+    <div id="codeArea" class="panel-right">
+
+    </div>
+</div>
+
+
+<div id="sideBar">
+    @foreach (var domain in Model)
+    {
+        <div class="col-xs-12" id="channels">
+            <span class="sidebar-heading">@domain.Name</span>
+            @foreach (var channel in domain.Channels)
+            {
+                <br />
+                <span class="sidebar-item" onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</span>
+            }
+        </div>
+        <br />
+    }
 </div>
 <div id="inputArea">
-	<div id="messageContainer"><input class="input-lg form-control" type="text" id="message" /></div>
-	<div id="sendBtnContainer">
-		<button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-	</div>
+    <div id="messageContainer">
+        <input class="input-lg form-control" type="text" id="message" />
+    </div>
+    <div id="sendBtnContainer">
+        <button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+    </div>
 </div>
-
+<div class="dropdown" id="mobileChatNav">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Channels</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
+</div>
 <input type="hidden" id="displayname" />
-
-<!--Add script to update the page and send messages.-->
+<script src="~/scripts/knockout-3.4.0.js"></script>
+<script src="~/scripts/noch-app.js"></script>
 <script type="text/javascript">
-	$(function () {
-		// Declare a proxy to reference the hub.
-		var chat = $.connection.chatHub;
-		// Create a function that the hub can call to broadcast messages.
-		chat.client.broadcastMessage = function (name, message) {
-			// Html encode display name and message.
-			var encodedName = $('<div />').text(name).html();
-			var encodedMsg = $('<div />').text(message).html();
-			// Add the message to the page.
-			$('#discussion').append('<li><strong>' + encodedName
-				+ '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
-		};
-		// Get the user name and store it to prepend to messages.
-		$('#displayname').val(prompt('Enter your name:', ''));
-		// Set initial focus to message input box.
-		$('#message').focus();
-		// Start the connection.
-		$.connection.hub.start().done(function () {
-			$('#sendmessage').click(function () {
-				// Call the Send method on the hub.
-				chat.server.send($('#displayname').val(), $('#message').val());
-				// Clear text box and reset focus for next comment.
-				$('#message').val('').focus();
-			});
-		});
-	});
+	VARS.init({ username: '@ViewBag.Username', userid: @ViewBag.UserID, channelid: @Session["currchannel"] });
+</script>
+<script src="https://rawgit.com/RickStrahl/jquery-resizable/master/src/jquery-resizable.js"></script>
+<script>
+    $(".panel-left").resizable({
+        handleSelector: ".splitter",
+        resizeHeight: false
+    });
+    $(".panel-top").resizable({
+        handleSelector: ".splitter-horizontal",
+        resizeWidth: false
+    });
+
 </script>

@@ -87,12 +87,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelService.cs" />
     <Compile Include="Data\Channels.cs" />
     <Compile Include="Data\Domains.cs" />
     <Compile Include="Data\Messages.cs" />
     <Compile Include="Data\NochDBEntities.cs" />
     <Compile Include="Data\UserDomains.cs" />
     <Compile Include="Data\Users.cs" />
+    <Compile Include="DomainService.cs" />
+    <Compile Include="MessageService.cs" />
     <Compile Include="Migrations\201609270355156_First.cs" />
     <Compile Include="Migrations\201609270355156_First.Designer.cs">
       <DependentUpon>201609270355156_First.cs</DependentUpon>
