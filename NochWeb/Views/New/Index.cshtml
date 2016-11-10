@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        Hey look, you dont have a domain, so make one.
+    </div>
+@using (Html.BeginForm("MakeDomain", "New"))
+{
+    <div>
+        @Html.TextBox("DomainName")
+        <input type="submit" name="mkDomain" value="Make Domain" />
+    </div>
+}
+</body>
+</html>

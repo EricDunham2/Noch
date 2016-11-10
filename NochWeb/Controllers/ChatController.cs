@@ -33,8 +33,10 @@ namespace NochWeb.Controllers
                 }
 
                 // set default channel if there isnt one
-                if (Session["currchannel"] == null)
+                if (Session["currchannel"] == null && domains.Count > 0)
                     Session["currchannel"] = domains[0].Channels.ElementAt(0).ChannelID;
+                else if (domains.Count == 0)
+                    return RedirectToAction("Index", "New");
 
                 return View(domains);
             }
