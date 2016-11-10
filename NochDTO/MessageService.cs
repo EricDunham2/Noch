@@ -10,7 +10,7 @@ namespace NochDAL
 {
     public class MessageService : BaseService
     {
-        public static void SendMessage (Messages message)
+        public static void SendMessage(Messages message)
         {
             using (NochDBEntities _db = new NochDBEntities())
             {
@@ -23,7 +23,7 @@ namespace NochDAL
             }
         }
 
-        public static List<Messages> GetMessages (int channelId, int messageCount)
+        public static List<Messages> GetMessages(int channelId, int messageCount)
         {
             var messages = new List<Messages>();
 
@@ -41,5 +41,29 @@ namespace NochDAL
 
             return messages;
         }
+
+        public static void UpdateMessage(int userId, int msgId, int channelId, string msg)
+        {
+            using (NochDBEntities _db = new NochDBEntities())
+            {
+                try
+                {
+                    Messages message = new Messages();
+                    message.MessageID = msgId;
+
+                    _db.Messages.Attach(message);
+
+                    message.UserID = userId;
+                    message.ChannelID = channelId;
+                    message.Content = msg;
+                    message.IsEdited = true;
+                    message.UpdatedOn = DateTime.Now;
+
+                    _db.SaveChanges();
+                }
+                catch (Exception ex) { }
+            }
+        }
+
     }
 }
