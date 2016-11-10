@@ -106,7 +106,7 @@ function getChannelMessages(channelId) {
             chatViewModel.messages.removeAll();
             for (var i = 0; i < messages.length; ++i) {
 
-                chatViewModel.messages.push({ name: messages[i].Username, message: messages[i].Content });
+                chatViewModel.messages.push({ name: messages[i].Username, message: messages[i].Content, id: messages[i].MessageID });
             }
             VARS.setChannelID(channelId);
         },
@@ -130,6 +130,26 @@ function makeDomain(name) {
         }
     });
 }
+
+
+function updateMessage(msgUserId, msgId, msg) {
+
+
+    if (msgUserId == VARS.getUserID())
+    return $.ajax({
+        url: '/Chat/UpdateMessage/',
+        type: 'POST',
+        data: JSON.stringify({ newDomain: name, userid: VARS.getUserID() }),
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function () {
+        },
+        error: function (request, status, error) {
+            console.log(error)
+        }
+    });
+}
+
 
 function makeChannel(nameIn, domainid) {
     return $.ajax({

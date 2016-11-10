@@ -32,6 +32,9 @@ namespace NochWeb.Controllers
                     d.Channels = ChannelService.GetChannelsForDomain(d.DomainID);
                 }
 
+                if (domains.Count == 0)
+                    return RedirectToAction("Index", "New");
+
                 // set default channel if there isnt one
                 int idxd = 0;
                 while (Session["currchannel"] == null){
@@ -67,6 +70,11 @@ namespace NochWeb.Controllers
             };
 
             MessageService.SendMessage(message);
+        }
+
+        public void UpdateMessage(int userId, int msgId, int channelId, string msg)
+        {
+            MessageService.UpdateMessage(userId, msgId, channelId, msg);
         }
 
         public void MakeDomain(string newDomain, int userid)

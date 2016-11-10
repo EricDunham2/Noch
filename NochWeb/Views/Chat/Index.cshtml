@@ -1,8 +1,8 @@
 ﻿@using NochDAL.Data
 @model List<Domains>
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
-	var user = ViewBag.User;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewBag.User;
 }
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -11,7 +11,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/"><img src="~/Content/img/logo_white_300px_124px.png" style="height:20px;" /></a>
         </div>
@@ -23,30 +23,31 @@
         </div>
     </div><!-- /.container-fluid -->
 </nav>
-<div id="messageArea" class="panel-left">
-	<ul id="discussion" data-bind="foreach: messages">
-		<li>
-			<span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
-		</li>
-	</ul>
-</div>
+    <div id="messageArea" class="panel-left">
+        <ul id="discussion" data-bind="foreach: messages">
+            <li>
+                <input class="msgid" type="hidden" data-bind="value: $data.id" />
+                <span class="msg-sender" data-bind="text: $data.name" ></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message" ></span>
+            </li>
+        </ul>
+    </div>
 <div id="sideBar">
 	<div class="col-md-12">
 		<h2>Domains</h2>
 	</div>
 	<div class="col-md-12">
-		<div class="input-group" style="padding:10px;">
-			<input type="text" class="form-control" id="newDomainName" placeholder="New Domain" aria-describedby="basic-addon2">
+    <div class="input-group" style="padding:10px;">
+        <input type="text" class="form-control" id="newDomainName" placeholder="New Domain" aria-describedby="basic-addon2">
 			<span class="input-group-addon" onclick="makeDomain(document.getElementById('newDomainName').value)">Add Domain</span>
-		</div>
+    </div>
 	</div>
 	<div class="col-md-12 no-padding">
 		<ul class="list-group">
 			@{ Random r = new Random(); }
-			@foreach (var domain in Model)
-			{
-				var dName = domain.Name;
-				dName = dName.Replace(' ', '_');
+    @foreach (var domain in Model)
+    {
+        var dName = domain.Name;
+        dName = dName.Replace(' ', '_');
 				var InputDid = dName + "Input";
 
 
@@ -55,42 +56,42 @@
 					<span class="list-group-text" data-toggle="collapse" data-target="#@dName">@domain.Name</span>
 					<div id="@dName" class="collapse">
 						<ul class="item-list">
-							@foreach (var channel in domain.Channels)
-							{
+                @foreach (var channel in domain.Channels)
+                {
 								<li class="item"><a onclick="getChannelMessages(@channel.ChannelID)">@channel.Name</a></li>
-							}
+                }
 						</ul>
 						<div class="input-group" style="margin:10px 0">
 							<input type="text" class="form-control" id="@InputDid" placeholder="New Channel" aria-describedby="basic-addon2">
 							<span class="input-group-addon" onclick="makeChannel(document.getElementById('@InputDid').value, @domain.DomainID)"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
 
-					</div>
+            </div>
 				</li>
-            }
+    }
 		</ul>
 	</div>
 </div>
 
 <div id="inputArea">
-	<div id="messageContainer">
-		<input class="input-lg form-control" type="text" id="message" />
-	</div>
-	<div id="sendBtnContainer">
-		<button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-	</div>
+    <div id="messageContainer">
+        <input class="input-lg form-control" type="text" id="message" />
+    </div>
+    <div id="sendBtnContainer">
+        <button type="button" class="send-btn" id="sendmessage"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+    </div>
 </div>
 <div class="dropdown" id="mobileChatNav">
-	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		<i class="fa fa-bars fa-2x" aria-hidden="true"></i>
-	</button>
-	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		<li><a href="#">Channels</a></li>
-		<li><a href="#">Another action</a></li>
-		<li><a href="#">Something else here</a></li>
-		<li role="separator" class="divider"></li>
-		<li><a href="#">Separated link</a></li>
-	</ul>
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Channels</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
 </div>
 <input type="hidden" id="displayname" />
 <script src="~/scripts/knockout-3.4.0.js"></script>
@@ -102,14 +103,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://rawgit.com/RickStrahl/jquery-resizable/master/src/jquery-resizable.js"></script>
 <script>
-	$(".panel-left").resizable({
-		handleSelector: ".splitter",
-		resizeHeight: false
-	});
-	$(".panel-top").resizable({
-		handleSelector: ".splitter-horizontal",
-		resizeWidth: false
-	});
+    $(".panel-left").resizable({
+        handleSelector: ".splitter",
+        resizeHeight: false
+    });
+    $(".panel-top").resizable({
+        handleSelector: ".splitter-horizontal",
+        resizeWidth: false
+    });
 
 </script>
 
