@@ -26,7 +26,7 @@ function chatViewModel() {
     };
     this.channelCollapse = function(data, event) {
         var name = $(event.currentTarget).data('domain-name');
-        $('#' + name + '_domain').collapse('show');
+        $('#' + name + '_domain').collapse('toggle');
 };
 }
 
@@ -152,7 +152,7 @@ function getChannelMessages(channelId) {
                     else
                         newMessage += words[j] + " "
                 }
-                chatViewModel.messages.push({ name: messages[i].Username, message: newMessage, id: messages[i].MessageID });
+                vm.messages.push({ name: messages[i].Username, message: newMessage, id: messages[i].MessageID });
             }
             VARS.setChannelID(channelId);
         },
