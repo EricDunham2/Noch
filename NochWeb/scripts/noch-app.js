@@ -69,8 +69,12 @@ $(document).ready(function () {
         var words = message.split(" ");
         var newMessage = "";
         for (j = 0; j < words.length; ++j) {
-            if (words[j].indexOf(".com") != -1 || words[j].indexOf(".ca") != -1)
-                newMessage += "<a href='" + words[j] + "'>" + words[j] + "</a> ";
+            if (words[j].indexOf(".com") != -1 || words[j].indexOf(".ca") != -1) {
+                var url = words[j];
+                if (url.indexOf("http://") == -1 && url.indexOf("https://") == -1)
+                    url = "http://" + url;
+                newMessage += "<a target='_blank' href='" + url + "'>" + words[j] + "</a> ";
+            }
             else
                 newMessage += words[j] + " ";
         }
@@ -147,8 +151,13 @@ function getChannelMessages(channelId) {
                 var words = messages[i].Content.split(" ");
                 var newMessage = "";
                 for (j = 0; j < words.length; ++j) {
-                    if (words[j].indexOf(".com") != -1 || words[j].indexOf(".ca") != -1)
-                        newMessage += "<a href='" + words[j] + "'>" + words[j] + "</a> "
+                    if (words[j].indexOf(".com") != -1 || words[j].indexOf(".ca") != -1) {
+                        var url = words[j];
+                        if (url.indexOf("http://") == -1 && url.indexOf("https://") == -1)
+                            url = "http://" + url;
+                        newMessage += "<a target='_blank' href='" + url + "'>" + words[j] + "</a> "
+
+                    }
                     else
                         newMessage += words[j] + " "
                 }
