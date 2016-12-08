@@ -1,7 +1,37 @@
 ﻿/* Knockout View Model */
-var chatViewModel = {
-    messages: ko.observableArray()
-};
+function chatViewModel() {
+    _this = this;
+    this.messages = ko.observableArray();
+    this.domains = ko.observableArray();
+    this.newChannelName = ko.observable();
+    this.selectedDomain = ko.observable({
+        DomainID: ko.observable(),
+        Name: ko.observable(),
+        Channels: ko.observableArray()
+    });
+    this.channelModal = function(data, event) {
+        _this.selectedDomain()
+            .DomainID(data.DomainID)
+            .Name(data.Name)
+            .Channels(data.Channels);
+        $('#channelModal').modal('show');
+    };
+    this.makeChannel = function (data, event) {
+        var domainId = $(event.currentTarget).data('domainid');
+        makeChannel(_this.newChannelName(), domainId);
+    };
+    this.getMessages = function (data, event) {      
+        getChannelMessages(data.ChannelID);
+        $('#channelModal').modal('hide');
+    };
+    this.channelCollapse = function(data, event) {
+        var name = $(event.currentTarget).data('domain-name');
+        $('#' + name + '_domain').collapse('show');
+    };
+}
+
+/* Main View-Model */
+var vm = {};
 
 /* Object for accessing state info (it's passed through the script tag) */
 var VARS = VARS || (function () {
@@ -24,12 +54,14 @@ var VARS = VARS || (function () {
             _args.channelid = channelId;
         }
     };
-}());
+} ());
 
 $(document).ready(function () {
 
-    ko.applyBindings(chatViewModel);
-
+    vm = new chatViewModel();
+    getDomainsForCurrentUser().done(function () {
+        ko.applyBindings(vm);
+    });
     // Declare a proxy to reference the hub.
     var chat = $.connection.chatHub;
     // Create a function that the hub can call to broadcast messages.
@@ -37,7 +69,7 @@ $(document).ready(function () {
 
         /* push back messagees to observable array, which automatically updates the discussion ul
 		   you can see on the index page the 'data-bind' attribute that binds to this array */
-        chatViewModel.messages.push({
+        vm.messages.push({
             name: name,
             message: message
         });
@@ -103,12 +135,32 @@ function getChannelMessages(channelId) {
         contentType: 'application/json; charset=utf-8',
         success: function (messages) {
             console.log(messages);
-            chatViewModel.messages.removeAll();
+            vm.messages.removeAll();
             for (var i = 0; i < messages.length; ++i) {
 
-                chatViewModel.messages.push({ name: messages[i].Username, message: messages[i].Content, id: messages[i].MessageID });
+                vm.messages.push({ name: messages[i].Username, message: messages[i].Content, id: messages[i].MessageID });
             }
             VARS.setChannelID(channelId);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+
+function getDomainsForCurrentUser() {
+    return $.ajax({
+        url: '/Chat/GetDomainsForCurrentUser',
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            if (null !== data) {
+                vm.domains.removeAll();
+                for (var idx = 0; idx < data.length; ++idx) {
+                    vm.domains.push(data[idx]);
+                }
+            }
         },
         error: function (data) {
             console.log(data);
@@ -123,7 +175,8 @@ function makeDomain(name) {
         data: JSON.stringify({ newDomain: name, userid: VARS.getUserID() }),
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
-        success: function () {         
+        success: function () {
+            getDomainsForCurrentUser();
         },
         error: function (request, status, error) {
             console.log(error)
@@ -136,18 +189,18 @@ function updateMessage(msgUserId, msgId, msg) {
 
 
     if (msgUserId == VARS.getUserID())
-    return $.ajax({
-        url: '/Chat/UpdateMessage/',
-        type: 'POST',
-        data: JSON.stringify({ newDomain: name, userid: VARS.getUserID() }),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function () {
-        },
-        error: function (request, status, error) {
-            console.log(error)
-        }
-    });
+        return $.ajax({
+            url: '/Chat/UpdateMessage/',
+            type: 'POST',
+            data: JSON.stringify({ newDomain: name, userid: VARS.getUserID() }),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
 }
 
 
@@ -155,10 +208,11 @@ function makeChannel(nameIn, domainid) {
     return $.ajax({
         url: '/Chat/MakeChannel/',
         type: 'POST',
-        data: JSON.stringify({ name: nameIn, did:domainid }),
+        data: JSON.stringify({ name: nameIn, did: domainid }),
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function () {
+            getDomainsForCurrentUser();
         },
         error: function (request, status, error) {
             console.log(error)
