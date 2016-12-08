@@ -27,7 +27,7 @@
         <ul id="discussion" data-bind="foreach: messages">
             <li>
                 <input class="msgid" type="hidden" data-bind="value: $data.id" />
-                <span class="msg-sender" data-bind="text: $data.name" ></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message" ></span>
+                <span class="msg-sender" data-bind="text: $data.name" ></span>:&nbsp;<span class="msg-body" data-bind="html: $data.message" ></span>
             </li>
         </ul>
     </div>

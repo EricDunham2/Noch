@@ -174,7 +174,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\img\icon_bw.png" />
     <Content Include="Content\img\logo_white_300px_124px.png" />
     <Content Include="Content\img\splashpage_bg.jpg" />
@@ -188,9 +187,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\noch - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\noch - Web Deploy.pubxml" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\jquery-3.1.1.js" />
     <Content Include="scripts\jquery-3.1.1.min.js" />

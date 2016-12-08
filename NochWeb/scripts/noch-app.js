@@ -34,12 +34,19 @@ $(document).ready(function () {
     var chat = $.connection.chatHub;
     // Create a function that the hub can call to broadcast messages.
     chat.client.broadcastMessage = function (name, message) {
-
+        var words = message.split(" ");
+        var newMessage = "";
+        for (j = 0; j < words.length; ++j) {
+            if (words[j].indexOf(".com") != -1 || words[j].indexOf(".ca") != -1)
+                newMessage += "<a href='" + words[j] + "'>" + words[j] + "</a> ";
+            else
+                newMessage += words[j] + " ";
+        }
         /* push back messagees to observable array, which automatically updates the discussion ul
 		   you can see on the index page the 'data-bind' attribute that binds to this array */
         chatViewModel.messages.push({
             name: name,
-            message: message
+            message: newMessage
         });
     };
 
@@ -105,8 +112,15 @@ function getChannelMessages(channelId) {
             console.log(messages);
             chatViewModel.messages.removeAll();
             for (var i = 0; i < messages.length; ++i) {
-
-                chatViewModel.messages.push({ name: messages[i].Username, message: messages[i].Content, id: messages[i].MessageID });
+                var words = messages[i].Content.split(" ");
+                var newMessage = "";
+                for (j = 0; j < words.length; ++j) {
+                    if (words[j].indexOf(".com") != -1 || words[j].indexOf(".ca") != -1)
+                        newMessage += "<a href='" + words[j] + "'>" + words[j] + "</a> "
+                    else
+                        newMessage += words[j] + " "
+                }
+                chatViewModel.messages.push({ name: messages[i].Username, message: newMessage, id: messages[i].MessageID });
             }
             VARS.setChannelID(channelId);
         },
