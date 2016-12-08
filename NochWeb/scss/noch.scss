@@ -117,6 +117,17 @@ $sansSerif: "Karla", "Helvetica", "Arial", sans-serif;
             .msg-sender {
                 font-weight: bold;
             }
+
+            .msg-edit {
+                display: none;
+                float: right;
+                color: gray;
+                margin-right: 10px;
+            }
+
+            &:hover > .msg-edit {
+                display: inline-block;
+            }
         }
     }
 }

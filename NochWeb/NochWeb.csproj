@@ -180,6 +180,9 @@
     <Content Include="Content\img\splashpage_bg.jpg" />
     <Content Include="Content\img\splashpage_bg_ipad.jpg" />
     <Content Include="Content\noch.css" />
+    <Content Include="Content\noch.min.css">
+      <DependentUpon>noch.css</DependentUpon>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
@@ -191,6 +194,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\noch - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\noch - Web Deploy.pubxml" />
     <None Include="scripts\jquery-3.1.0.intellisense.js" />
@@ -198,6 +205,13 @@
     <Content Include="scripts\jquery-3.1.0.min.js" />
     <Content Include="scripts\jquery-3.1.0.slim.js" />
     <Content Include="scripts\jquery-3.1.0.slim.min.js" />
+    <Content Include="scripts\noch-app.js" />
+    <Content Include="scss\noch.css">
+      <DependentUpon>noch.scss</DependentUpon>
+    </Content>
+    <Content Include="scss\noch.min.css">
+      <DependentUpon>noch.css</DependentUpon>
+    </Content>
     <Content Include="Views\web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Web.config" />
@@ -228,6 +242,7 @@
     <Content Include="scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\New\Index.cshtml" />
+    <Content Include="scss\noch.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -237,7 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="scss\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NochDTO\NochDAL.csproj">

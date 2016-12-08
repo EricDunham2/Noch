@@ -1,4 +1,4 @@
-#mainWrap {
+﻿#mainWrap {
   position: absolute;
   left: 0;
   right: 0;
@@ -19,6 +19,7 @@
 #channels .sidebar-heading {
   font-size: 18px;
   font-weight: bold; }
+
 #channels .sidebar-item {
   transition: all 200ms ease-out;
   margin-left: 1em; }
@@ -84,6 +85,13 @@
       list-style-type: none; }
       #messageArea ul#discussion li .msg-sender {
         font-weight: bold; }
+      #messageArea ul#discussion li .msg-edit {
+        display: none;
+        float: right;
+        color: gray;
+        margin-right: 10px; }
+      #messageArea ul#discussion li:hover > .msg-edit {
+        display: inline-block; }
 
 #inputArea {
   position: absolute;
@@ -197,14 +205,12 @@
 @media (max-width: 991px) {
   #sideBar {
     display: none; }
-
   #messageArea {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 56px;
     top: 0; }
-
   #inputArea {
     position: absolute;
     right: 0;
@@ -217,7 +223,6 @@
       right: 100px;
       top: 5px;
       display: inline; }
-
   #mobileChatNav {
     display: inline;
     position: absolute;
@@ -231,13 +236,14 @@
         #mobileChatNav button li a:active, #mobileChatNav button li a:hover, #mobileChatNav button li:active, #mobileChatNav button li:hover, #mobileChatNav ul li a:active, #mobileChatNav ul li a:hover, #mobileChatNav ul li:active, #mobileChatNav ul li:hover {
           background-color: #ffeb3b;
           color: #ff5252; } }
+
 /* Medium Screens (Laptops) */
 @media (min-width: 992px) and (max-width: 1199px) {
   #mobileChatNav {
     display: none; } }
+
 /* Large Screens */
 @media (min-width: 1200px) {
   #mobileChatNav {
     display: none; } }
 
-/*# sourceMappingURL=noch.css.map */

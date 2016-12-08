@@ -18,5 +18,10 @@ namespace NochWeb
             // Call the broadcastMessage method to update clients.
             Clients.All.broadcastMessage(name, message);
         }
+
+        public void Update(string id, string msg)
+        {
+            Clients.All.updateMessage(msg);
+        }
     }
 }

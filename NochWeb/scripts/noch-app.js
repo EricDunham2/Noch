@@ -28,6 +28,30 @@ function chatViewModel() {
         var name = $(event.currentTarget).data('domain-name');
         $('#' + name + '_domain').collapse('show');
     };
+    this.showEditBox = function (data, event) {
+        var msgIdx = _this.messages.indexOf(data);
+        if (msgIdx !== -1) {
+            _this.messages()[msgIdx].isEditable(!_this.messages()[msgIdx].isEditable());
+        }
+    };
+    this.editMessage = function (data, event) {
+        var chat = $.connection.chatHub;
+        chat.server.update(data.id, data.message);
+
+        $.ajax({
+            url: '/Chat/UpdateMessage',
+            type: 'POST',
+            data: JSON.stringify({msgId: data.msgId, msg: data.message }),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+
+            },
+            error: function (request, status, error) {
+                console.log(error);
+            }
+        });
+    };
 }
 
 /* Main View-Model */
@@ -134,16 +158,16 @@ function getChannelMessages(channelId) {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (messages) {
-            console.log(messages);
             vm.messages.removeAll();
             for (var i = 0; i < messages.length; ++i) {
 
-                vm.messages.push({ name: messages[i].Username, message: messages[i].Content, id: messages[i].MessageID });
+                var msg = { name: ko.observable(messages[i].Username), message: ko.observable(messages[i].Content), id: ko.observable(messages[i].MessageID), isEditable: ko.observable(false) };
+
+                vm.messages.push(msg);
             }
             VARS.setChannelID(channelId);
         },
         error: function (data) {
-            console.log(data);
         }
     });
 };
@@ -163,7 +187,6 @@ function getDomainsForCurrentUser() {
             }
         },
         error: function (data) {
-            console.log(data);
         }
     });
 };
@@ -179,7 +202,6 @@ function makeDomain(name) {
             getDomainsForCurrentUser();
         },
         error: function (request, status, error) {
-            console.log(error)
         }
     });
 }
@@ -198,7 +220,6 @@ function updateMessage(msgUserId, msgId, msg) {
             success: function () {
             },
             error: function (request, status, error) {
-                console.log(error)
             }
         });
 }
@@ -215,7 +236,6 @@ function makeChannel(nameIn, domainid) {
             getDomainsForCurrentUser();
         },
         error: function (request, status, error) {
-            console.log(error)
         }
     });
 }

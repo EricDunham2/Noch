@@ -27,7 +27,16 @@
 	<ul id="discussion" data-bind="foreach: messages">
 		<li>
 			<input class="msgid" type="hidden" data-bind="value: $data.id" />
-			<span class="msg-sender" data-bind="text: $data.name"></span>:&nbsp;<span class="msg-body" data-bind="text: $data.message"></span>
+			<span class="msg-sender" data-bind="text: $data.name"></span>
+            :&nbsp;
+            <span class="msg-body" data-bind="text: $data.message, visible: !($data.isEditable())"></span>
+            <input type="text" data-bind="value: $data.message, attr: {'id':'msg' + $data.id}, visible: $data.isEditable" />
+            <span class="msg-edit" data-bind="click: $root.showEditBox">
+                <span data-bind="visible: $data.isEditable()">cancel</span>
+                <span data-bind="visible: !($data.isEditable())">edit</span>
+            </span>
+            <span data-bind="visible: $data.isEditable(), click: $root.editMessage">save</span>
+
 		</li>
 	</ul>
 </div>
@@ -125,6 +134,5 @@
 		handleSelector: ".splitter-horizontal",
 		resizeWidth: false
 	});
-
 </script>
 

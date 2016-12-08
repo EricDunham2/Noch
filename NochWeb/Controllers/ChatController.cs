@@ -75,9 +75,13 @@ namespace NochWeb.Controllers
 			MessageService.SendMessage(message);
 		}
 
-		public void UpdateMessage(int userId, int msgId, int channelId, string msg)
+        [HttpPost]
+		public void UpdateMessage(int msgId, string msg)
 		{
-			MessageService.UpdateMessage(userId, msgId, channelId, msg);
+            Users user = (Users)HttpContext.Session["user"];
+            Channels channel = (Channels)HttpContext.Session["currchannel"];
+            
+            MessageService.UpdateMessage(user.UserID, msgId, channel.ChannelID, msg);
 		}
 
 		public void MakeDomain(string newDomain, int userid)
@@ -188,5 +192,14 @@ namespace NochWeb.Controllers
 
 			return Json(models, JsonRequestBehavior.AllowGet);
 		}
+
+        public int EditMessage(int messageId, string message)
+        {
+            int result = -1;
+
+
+
+            return result;
+        }
 	}
 }
